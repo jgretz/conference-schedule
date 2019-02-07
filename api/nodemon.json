@@ -1,0 +1,3 @@
+{
+    "ignore": ["tools/*.js", "README", "package.json"] 
+}

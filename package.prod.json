@@ -1,0 +1,16 @@
+{
+  "name": "codemashschedule",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Josh Gretz",
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.7.2",
+    "node-bits": "^0.0.34",
+    "node-bits-express": "^0.0.21",
+    "node-bits-spa": "^0.0.8"
+  }
+}

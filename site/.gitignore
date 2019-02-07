@@ -1,0 +1,7 @@
+.idea/
+node_modules/
+dist/
+npm-debug.log
+app/styles/styles.min.css
+.DS_Store
+lib/

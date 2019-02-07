@@ -1,0 +1,34 @@
+{
+  "name": "simplecodemashhost",
+  "version": "1.0.0",
+  "description": "simple codemash schedule host",
+  "main": "src/index.js",
+  "author": "Josh Gretz",
+  "license": "MIT",
+  "scripts": {
+    "build": "node tools/build.js",
+    "debug": "nodemon --exec babel-node --inspect --presets es2015 src/index.js --inspect",
+    "nodemon": "NODE_ENV=DEV nodemon src/index.js --exec babel-node",
+    "start": "babel-node src/index.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.3",
+    "node-bits": "^0.0.34",
+    "node-bits-express": "^0.0.21",
+    "node-bits-spa": "^0.0.8"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^5.13.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^1.18.9",
+    "shelljs": "^0.8.3"
+  }
+}

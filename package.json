@@ -1,0 +1,32 @@
+{
+  "name": "simplecodemashschedule",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build-server": "node tools/build_server.js",
+    "build-site": "node tools/build_site.js",
+    "start": "nodemon src/index.js --exec babel-node",
+    "build": "node tools/build.js",
+    "test": "echo future",
+    "publish": "yarn build && git subtree push --prefix lib heroku master"
+  },
+  "author": "Josh Gretz",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^5.10.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.9",
+    "shelljs": "^0.8.3"
+  }
+}
