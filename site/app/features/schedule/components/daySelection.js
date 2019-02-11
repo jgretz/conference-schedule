@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import Button from '@material-ui/core/Button';
 
 import {selectDay} from '../actions';
-import {selectedDaySelector} from '../selectors';
-import {DAYS} from '../../shared/constants';
+import {selectedConferenceSelector, selectedDaySelector} from '../selectors';
 
 const handleDayClick = (day, selectDay) => () => {
   selectDay(day);
@@ -24,13 +23,14 @@ const renderDay = ({selectedDay, selectDay}) => day => (
   </Button>
 );
 
-const Days = props => {
-  const days = DAYS.map(renderDay(props));
+const Days = ({selectedConference, ...props}) => {
+  const days = selectedConference.days.map(renderDay(props));
 
   return <div className="day-select">{days}</div>;
 };
 
 const mapStateToProps = state => ({
+  selectedConference: selectedConferenceSelector(state),
   selectedDay: selectedDaySelector(state),
 });
 

@@ -5,6 +5,7 @@ export {default as flagsSelector} from './flagsSelector';
 export {default as isFavoriteSessionSelector} from './isFavoriteSessionSelector';
 export {default as roomForSessionSelector} from './roomForSessionSelector';
 export {default as roomsSelector} from './roomsSelector';
+export {default as selectedConferenceSelector} from './selectedConferenceSelector';
 export {default as selectedDaySelector} from './selectedDaySelector';
 export {default as sessionForCardSelector} from './sessionForCardSelector';
 export {default as sessionsForSelectedDaySelector} from './sessionsForSelectedDaySelector';

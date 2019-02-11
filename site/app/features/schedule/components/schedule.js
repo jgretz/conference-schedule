@@ -6,7 +6,7 @@ import withLifecycle from '@hocs/with-lifecycle';
 import List from './list';
 import DaySelection from './daySelection';
 
-import {loadCodeMashData} from '../actions';
+import {selectedConferenceSelector} from '../selectors';
 
 const Schedule = () => (
   <div className="schedule">
@@ -17,13 +17,14 @@ const Schedule = () => (
 
 const ComposedSchedule = compose(
   withLifecycle({
-    onDidMount({loadCodeMashData}) {
-      loadCodeMashData();
+    onDidMount({selectedConference, dispatch}) {
+      selectedConference.loadData(dispatch);
     },
   }),
 )(Schedule);
 
-export default connect(
-  null,
-  {loadCodeMashData},
-)(ComposedSchedule);
+const mapStateToProps = state => ({
+  selectedConference: selectedConferenceSelector(state),
+});
+
+export default connect(mapStateToProps)(ComposedSchedule);

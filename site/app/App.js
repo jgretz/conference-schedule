@@ -1,7 +1,8 @@
 import React from 'react';
 import {withRouter} from 'react-router';
 
-import {TitleBar, Routes} from './features/shared/components';
+import {TitleBar} from './features/schedule/components';
+import {Routes} from './features/shared/components';
 
 const Container = () => (
   <div className="root">

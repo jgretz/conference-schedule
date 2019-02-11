@@ -10,6 +10,7 @@ import {withStyles} from '@material-ui/core/styles';
 
 import {toggleFavoritesFilter} from '../../shared/actions';
 import {favoritesFilterSelector} from '../../shared/selectors';
+import {selectedConferenceSelector} from '../selectors';
 
 const styles = theme => ({
   root: {
@@ -51,17 +52,22 @@ const Filter = ({favoritesFilter, toggleFavoritesFilter}) => (
   </IconButton>
 );
 
-const Title = () => (
+const Title = ({selectedConference}) => (
   <Typography variant="h6" color="inherit">
-    Simple CodeMash Schedule
+    {selectedConference.title}
   </Typography>
 );
 
-const TitleBar = ({classes, favoritesFilter, toggleFavoritesFilter}) => (
+const TitleBar = ({
+  classes,
+  selectedConference,
+  favoritesFilter,
+  toggleFavoritesFilter,
+}) => (
   <AppBar position="static" color="primary">
     <Toolbar className={classes.toolbar}>
       <div className={classes.toolbarContent}>
-        <Title classes={classes} />
+        <Title classes={classes} selectedConference={selectedConference} />
         <Filter
           favoritesFilter={favoritesFilter}
           toggleFavoritesFilter={toggleFavoritesFilter}
@@ -73,6 +79,7 @@ const TitleBar = ({classes, favoritesFilter, toggleFavoritesFilter}) => (
 
 const mapStateToProps = state => ({
   favoritesFilter: favoritesFilterSelector(state),
+  selectedConference: selectedConferenceSelector(state),
 });
 
 export default connect(
