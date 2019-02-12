@@ -1,1 +1,7 @@
-export default state => state.features.schedule.day;
+import {createSelector} from 'reselect';
+import selectedSelector from './selectedSelector';
+
+export default createSelector(
+  selectedSelector,
+  ({day}) => day,
+);

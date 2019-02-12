@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 import {selectSpeakers} from '../actions';
-import {flagsSelector} from '../selectors';
+import {selectedSpeakersSelector, modalsSelector} from '../selectors';
 
 const styles = theme => ({
   paper: {
@@ -62,23 +62,22 @@ const renderSpeakerInfo = (classes, selectSpeakers) => speaker => (
   </div>
 );
 
-const SpeakerModal = ({classes, flags, selectSpeakers}) => (
+const SpeakerModal = ({classes, selectedSpeakers, modals, selectSpeakers}) => (
   <Modal
     aria-labelledby="simple-modal-title"
     aria-describedby="simple-modal-description"
-    open={flags.speakerModalOpen}
+    open={modals.speakerModal}
     onClose={handleClose(selectSpeakers)}
   >
     <div className={classes.paper}>
-      {(flags.selectedSpeakers || []).map(
-        renderSpeakerInfo(classes, selectSpeakers),
-      )}
+      {(selectedSpeakers || []).map(renderSpeakerInfo(classes, selectSpeakers))}
     </div>
   </Modal>
 );
 
 const mapStateToProps = state => ({
-  flags: flagsSelector(state),
+  selectedSpeakers: selectedSpeakersSelector(state),
+  modals: modalsSelector(state),
 });
 
 export default connect(

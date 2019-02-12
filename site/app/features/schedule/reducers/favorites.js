@@ -1,5 +1,5 @@
 import {stateReducer} from 'truefit-react-utils';
-import {TOGGLE_FAVORITE} from '../actions';
+import {TOGGLE_FAVORITE} from '../constants/actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const FAVORITES = 'FAVORITES';

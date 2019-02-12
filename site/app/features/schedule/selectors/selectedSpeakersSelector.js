@@ -3,5 +3,5 @@ import selectedSelector from './selectedSelector';
 
 export default createSelector(
   selectedSelector,
-  ({conference}) => conference,
+  ({speakers}) => speakers,
 );

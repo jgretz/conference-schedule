@@ -1,4 +1,4 @@
-export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
+import {TOGGLE_FAVORITE} from '../constants/actions';
 
 export const toggleFavorite = id => ({
   type: TOGGLE_FAVORITE,

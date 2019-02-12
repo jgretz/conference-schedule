@@ -1,12 +1,14 @@
 export {default as categoriesForSessionSelector} from './categoriesForSessionSelector';
 export {default as categoriesSelector} from './categoriesSelector';
 export {default as favoritesSelector} from './favoritesSelector';
-export {default as flagsSelector} from './flagsSelector';
 export {default as isFavoriteSessionSelector} from './isFavoriteSessionSelector';
+export {default as modalsSelector} from './modalsSelector';
 export {default as roomForSessionSelector} from './roomForSessionSelector';
 export {default as roomsSelector} from './roomsSelector';
 export {default as selectedConferenceSelector} from './selectedConferenceSelector';
 export {default as selectedDaySelector} from './selectedDaySelector';
+export {default as selectedSelector} from './selectedSelector';
+export {default as selectedSpeakersSelector} from './selectedSpeakersSelector';
 export {default as sessionForCardSelector} from './sessionForCardSelector';
 export {default as sessionsForSelectedDaySelector} from './sessionsForSelectedDaySelector';
 export {default as sessionsSelector} from './sessionsSelector';
