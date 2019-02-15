@@ -1,5 +1,5 @@
 import {stateReducer} from 'truefit-react-utils';
-import {LOADING_SCHEDULE_DATA} from '../constants/actions';
+import {LOADED_SCHEDULE_DATA} from '../constants/actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const SPEAKERS = 'SPEAKERS';
@@ -7,7 +7,7 @@ const SPEAKERS = 'SPEAKERS';
 const INITIAL = getItemFromStorage(SPEAKERS);
 
 export default stateReducer(INITIAL, {
-  [LOADING_SCHEDULE_DATA]: (_, {speakers}) => {
+  [LOADED_SCHEDULE_DATA]: (_, {speakers}) => {
     setItemInStorage(SPEAKERS, speakers);
 
     return speakers;

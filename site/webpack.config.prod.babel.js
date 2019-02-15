@@ -39,20 +39,21 @@ export default {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         exclude: /(node_modules|babelHelpers)/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
               [
-                '@babel/env',
+                '@babel/preset-env',
                 {
+                  useBuiltIns: 'entry',
                   modules: false,
                   forceAllTransforms: true,
                 },
               ],
-              '@babel/react',
+              '@babel/preset-react',
             ],
             plugins: [
               [
@@ -125,7 +126,7 @@ export default {
         use: ['file-loader'],
       },
       {
-        test: /\.(jpe?g|png|gif|ico)$/i,
+        test: /\.(jpe?g|png|gif)$/i,
         use: ['file-loader'],
       },
     ],

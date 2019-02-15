@@ -12,7 +12,7 @@ export default {
   },
   devtool: 'eval-source-map',
   plugins: [
-    new EnvironmentPlugin({API_BASE_URL: 'http://localhost:4005/api/'}),
+    new EnvironmentPlugin({API_BASE_URL: 'http://localhost:4000/api/'}),
     new HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({template: 'app/index.ejs'}),
   ],
@@ -28,6 +28,7 @@ export default {
               [
                 '@babel/preset-env',
                 {
+                  useBuiltIns: 'entry',
                   modules: false,
                   forceAllTransforms: true,
                 },
@@ -42,7 +43,6 @@ export default {
               '@babel/plugin-syntax-dynamic-import',
               '@babel/plugin-proposal-object-rest-spread',
               '@babel/plugin-external-helpers',
-              'babel-plugin-transform-react-remove-prop-types',
             ],
           },
         },
