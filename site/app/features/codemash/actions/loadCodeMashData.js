@@ -11,14 +11,22 @@ const mapToSharedModel = data => {
   const tags = _.flatMap(data.categories, x => x.items);
   const sessions = data.sessions.map(x => ({
     ...x,
+    startTime: x.startsAt,
+    endTime: x.endsAt,
     tags: x.categoryItems,
+  }));
+
+  const speakers = data.speakers.map(x => ({
+    ...x,
+    name: x.fullName,
   }));
 
   return {
     sessions,
-    rooms: data.rooms,
-    speakers: data.speakers,
+    speakers,
     tags,
+
+    rooms: data.rooms,
   };
 };
 

@@ -20,11 +20,11 @@ const styles = () => ({
 });
 
 const groupSessions = sessions => {
-  const times = _.uniq(sessions.map(s => s.startsAt));
+  const times = _.uniq(sessions.map(s => s.startTime));
 
   return times.map(t => ({
     time: t,
-    sessions: sessions.filter(s => s.startsAt === t),
+    sessions: sessions.filter(s => s.startTime === t),
   }));
 };
 

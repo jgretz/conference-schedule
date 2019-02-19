@@ -93,7 +93,7 @@ const SessionCard = ({
           className={classes.speakerButton}
           onClick={handleSpeakerClick(speakers, selectSpeakers)}
         >
-          {speakers.map(s => s.fullName).join(', ')}
+          {speakers.map(s => s.name).join(', ')}
         </Button>
       }
       action={

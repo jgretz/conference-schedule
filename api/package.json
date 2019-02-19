@@ -16,6 +16,7 @@
     "cheerio": "^1.0.0-rc.2",
     "compression": "^1.7.3",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "node-bits": "^0.0.34",
     "node-bits-code": "^0.0.25",
     "node-bits-express": "^0.0.21",

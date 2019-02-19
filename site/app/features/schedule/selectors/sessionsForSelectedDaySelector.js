@@ -13,13 +13,13 @@ export default createSelector(
   favoritesFilterSelector,
   (day, allSessions, favorites, favoritesFilter) => {
     const sessions = (allSessions || []).filter(s => {
-      if (!moment(s.startsAt).isSame(day, 'day')) {
+      if (!moment(s.startTime).isSame(day, 'day')) {
         return false;
       }
 
       return !favoritesFilter || favorites.includes(s.id);
     });
 
-    return _.sortBy(sessions, s => moment(s.startsAt));
+    return _.sortBy(sessions, s => moment(s.startTime));
   },
 );

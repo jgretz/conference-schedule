@@ -36,7 +36,7 @@ const parseSessions = (data, $, date, roomId, sessionsDom) => {
       .toUpperCase()
       .split(' - ');
     const startTime = times[0];
-    const stopTime = times[1];
+    const endTime = times[1];
 
     const title = session.find('.sz-session__title a').text();
 
@@ -65,15 +65,14 @@ const parseSessions = (data, $, date, roomId, sessionsDom) => {
       sessionTags.push(tagId);
       data.tags.push({
         id: tagId,
-        text: tagText,
+        name: tagText,
       });
     });
 
     data.sessions.push({
-      room: roomId,
-      date,
-      startTime,
-      stopTime,
+      roomId,
+      startTime: `${date} ${startTime} EDT`,
+      endTime: `${date} ${endTime} EDT`,
       title,
       speakers: sessionSpeakers,
       tags: sessionTags,
@@ -94,7 +93,7 @@ const parseTracks = (data, $) => day => {
     const roomId = track.attr('data-roomid');
     const room = track.find('h2').text();
 
-    data.rooms.push({id: roomId, room});
+    data.rooms.push({id: roomId, name: room});
 
     parseSessions(data, $, date, roomId, track.find('.sz-session__card'));
   });
