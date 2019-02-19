@@ -4,7 +4,7 @@ import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const SPEAKERS = 'SPEAKERS';
 
-const INITIAL = getItemFromStorage(SPEAKERS);
+const INITIAL = getItemFromStorage(SPEAKERS) || [];
 
 export default stateReducer(INITIAL, {
   [LOADED_SCHEDULE_DATA]: (_, {speakers}) => {

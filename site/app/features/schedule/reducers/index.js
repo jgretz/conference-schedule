@@ -1,6 +1,5 @@
 /* eslint-disable sort-imports */
 import {combineReducers} from 'redux';
-import categories from './categories.js';
 import favorites from './favorites.js';
 import loading from './loading.js';
 import modals from './modals.js';
@@ -8,9 +7,9 @@ import rooms from './rooms.js';
 import selected from './selected.js';
 import sessions from './sessions.js';
 import speakers from './speakers.js';
+import tags from './tags.js';
 
 export default combineReducers({
-  categories,
   favorites,
   loading,
   modals,
@@ -18,4 +17,5 @@ export default combineReducers({
   selected,
   sessions,
   speakers,
+  tags,
 });

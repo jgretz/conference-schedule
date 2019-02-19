@@ -1,5 +1,3 @@
-export {default as categoriesForSessionSelector} from './categoriesForSessionSelector';
-export {default as categoriesSelector} from './categoriesSelector';
 export {default as favoritesSelector} from './favoritesSelector';
 export {default as isFavoriteSessionSelector} from './isFavoriteSessionSelector';
 export {default as modalsSelector} from './modalsSelector';
@@ -14,3 +12,5 @@ export {default as sessionsForSelectedDaySelector} from './sessionsForSelectedDa
 export {default as sessionsSelector} from './sessionsSelector';
 export {default as speakersForSessionSelector} from './speakersForSessionSelector';
 export {default as speakersSelector} from './speakersSelector';
+export {default as tagsForSessionSelector} from './tagsForSessionSelector';
+export {default as tagsSelector} from './tagsSelector';

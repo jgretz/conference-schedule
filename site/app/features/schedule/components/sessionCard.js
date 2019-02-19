@@ -14,7 +14,7 @@ import {toggleFavorite, selectSpeakers} from '../actions';
 import {
   speakersForSessionSelector,
   roomForSessionSelector,
-  categoriesForSessionSelector,
+  tagsForSessionSelector,
   isFavoriteSessionSelector,
 } from '../selectors';
 
@@ -59,7 +59,7 @@ const Favorite = ({session, isFavorite, toggleFavorite}) => (
   </IconButton>
 );
 
-const Content = ({session, room, categories, classes}) => (
+const Content = ({session, room, tags, classes}) => (
   <CardContent>
     <Typography
       component="p"
@@ -69,9 +69,7 @@ const Content = ({session, room, categories, classes}) => (
       <Typography component="p" className={classes.room}>
         {room.name}
       </Typography>
-      <Typography component="p">
-        {categories.map(c => c.name).join(', ')}
-      </Typography>
+      <Typography component="p">{tags.map(c => c.name).join(', ')}</Typography>
     </div>
   </CardContent>
 );
@@ -81,7 +79,7 @@ const SessionCard = ({
   session,
   speakers,
   room,
-  categories,
+  tags,
   isFavorite,
 
   toggleFavorite,
@@ -107,19 +105,14 @@ const SessionCard = ({
       }
       className="card-header"
     />
-    <Content
-      session={session}
-      room={room}
-      categories={categories}
-      classes={classes}
-    />
+    <Content session={session} room={room} tags={tags} classes={classes} />
   </Card>
 );
 
 const mapStateToProps = (state, props) => ({
   speakers: speakersForSessionSelector(state, props),
   room: roomForSessionSelector(state, props),
-  categories: categoriesForSessionSelector(state, props),
+  tags: tagsForSessionSelector(state, props),
   isFavorite: isFavoriteSessionSelector(state, props),
 });
 
