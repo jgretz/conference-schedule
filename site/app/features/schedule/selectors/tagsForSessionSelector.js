@@ -1,9 +1,9 @@
 import {createSelector} from 'reselect';
-import sessionForCardSelector from './sessionForCardSelector';
+import sessionForDetailSelector from './sessionForDetailSelector';
 import tagsSelector from './tagsSelector';
 
 export default createSelector(
   tagsSelector,
-  sessionForCardSelector,
+  sessionForDetailSelector,
   (tags, session) => tags.filter(c => session.tags.includes(c.id)),
 );

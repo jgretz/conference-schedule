@@ -5,6 +5,7 @@ import withLifecycle from '@hocs/with-lifecycle';
 
 import List from './list';
 import DaySelection from './daySelection';
+import SessionModal from './sessionModal';
 
 import {selectedConferenceSelector} from '../selectors';
 
@@ -12,6 +13,8 @@ const Schedule = () => (
   <div className="schedule">
     <DaySelection />
     <List />
+
+    <SessionModal />
   </div>
 );
 

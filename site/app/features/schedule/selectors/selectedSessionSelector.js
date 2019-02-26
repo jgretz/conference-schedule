@@ -3,5 +3,5 @@ import selectedSelector from './selectedSelector';
 
 export default createSelector(
   selectedSelector,
-  ({speakers}) => speakers,
+  ({session}) => session,
 );

@@ -1,40 +1,32 @@
-import _ from 'lodash';
+import moment from 'moment';
 import {get} from 'truefit-react-utils';
-import {CODEMASH_DATA_URL} from '../constants';
+import {DATA_URL} from '../constants';
 import {
   LOADING_SCHEDULE_DATA,
   LOADED_SCHEDULE_DATA,
   FAILED_LOADING_SCHEDULE_DATA,
 } from '../../schedule/constants/actions';
 
+const DATE_FORMAT = 'MM-DD-YYYY HH:mm a SSS';
+
 const mapToSharedModel = data => {
-  const tags = _.flatMap(data.categories, x => x.items);
   const sessions = data.sessions.map(x => ({
     ...x,
-    startTime: x.startsAt,
-    endTime: x.endsAt,
-    tags: x.categoryItems,
-  }));
-
-  const speakers = data.speakers.map(x => ({
-    ...x,
-    name: x.fullName,
+    startTime: moment(x.startTime, DATE_FORMAT).toISOString(),
+    endTime: moment(x.endTime, DATE_FORMAT).toISOString(),
   }));
 
   return {
+    ...data,
     sessions,
-    speakers,
-    tags,
-
-    rooms: data.rooms,
   };
 };
 
-export const loadCodeMashData = async dispatch => {
+export const loadData = async dispatch => {
   dispatch({type: LOADING_SCHEDULE_DATA});
 
   try {
-    const response = await get(CODEMASH_DATA_URL);
+    const response = await get(DATA_URL);
     const payload = mapToSharedModel(response.data);
 
     dispatch({

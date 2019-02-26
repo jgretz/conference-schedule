@@ -16,6 +16,11 @@ export default {
     new HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({template: 'app/index.ejs'}),
   ],
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
+  },
   module: {
     rules: [
       {
@@ -43,6 +48,7 @@ export default {
               '@babel/plugin-syntax-dynamic-import',
               '@babel/plugin-proposal-object-rest-spread',
               '@babel/plugin-external-helpers',
+              'react-hot-loader/babel',
             ],
           },
         },

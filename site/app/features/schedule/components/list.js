@@ -6,7 +6,6 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import SessionCard from './sessionCard';
-import SpeakerModal from './speakerModal';
 import {sessionsForSelectedDaySelector} from '../selectors';
 
 const styles = () => ({
@@ -41,14 +40,11 @@ const renderSessionGroup = classes => group => (
 
 const List = ({classes, sessions}) => {
   const sessionGroups = groupSessions(sessions);
-
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={12} className={classes.grid}>
           {sessionGroups.map(renderSessionGroup(classes))}
-
-          <SpeakerModal />
         </Grid>
       </Grid>
     </div>

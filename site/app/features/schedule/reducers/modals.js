@@ -1,15 +1,30 @@
 import produce from 'immer';
 import {stateReducer} from 'truefit-react-utils';
 
-import {SPEAKERS_SELECTED} from '../constants/actions';
+import {
+  SESSION_SELECTED,
+  SESSION_DETAIL_SELECTED,
+  SESSION_SPEAKERS_SELECTED,
+} from '../constants/actions';
 
 const INITIAL = {
-  speakerModal: false,
+  sessionModalVisible: false,
+  sessionModalMode: SESSION_DETAIL_SELECTED,
 };
 
 export default stateReducer(INITIAL, {
-  [SPEAKERS_SELECTED]: (state, payload) =>
+  [SESSION_SELECTED]: (state, payload) =>
     produce(state, draft => {
-      draft.speakerModal = payload && payload.length > 0;
+      draft.sessionModalVisible = payload != null;
+    }),
+
+  [SESSION_DETAIL_SELECTED]: state =>
+    produce(state, draft => {
+      draft.sessionModalMode = SESSION_DETAIL_SELECTED;
+    }),
+
+  [SESSION_SPEAKERS_SELECTED]: state =>
+    produce(state, draft => {
+      draft.sessionModalMode = SESSION_SPEAKERS_SELECTED;
     }),
 });

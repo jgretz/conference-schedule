@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import InfoIcon from '@material-ui/icons/Info';
 
-import {toggleFavorite, selectSpeakers} from '../actions';
+import {toggleFavorite, selectSession} from '../actions';
 
 import {
   speakersForSessionSelector,
@@ -41,8 +41,8 @@ const styles = () => ({
   },
 });
 
-const handleSpeakerClick = (speakers, selectSpeakers) => () => {
-  selectSpeakers(speakers);
+const handleInfoClick = (session, selectSession) => () => {
+  selectSession(session);
 };
 
 const handleFavoriteClick = (session, toggleFavorite) => () => {
@@ -59,12 +59,17 @@ const Favorite = ({session, isFavorite, toggleFavorite}) => (
   </IconButton>
 );
 
-const Content = ({session, room, tags, classes}) => (
+const Info = ({session, selectSession}) => (
+  <IconButton
+    aria-label="More Info"
+    onClick={handleInfoClick(session, selectSession)}
+  >
+    <InfoIcon />
+  </IconButton>
+);
+
+const Content = ({room, tags, classes}) => (
   <CardContent>
-    <Typography
-      component="p"
-      dangerouslySetInnerHTML={{__html: session.description}}
-    />
     <div className={classes.contentFooter}>
       <Typography component="p" className={classes.room}>
         {room.name}
@@ -83,25 +88,25 @@ const SessionCard = ({
   isFavorite,
 
   toggleFavorite,
-  selectSpeakers,
+  selectSession,
 }) => (
   <Card className={classes.card}>
     <CardHeader
       title={session.title}
       subheader={
-        <Button
-          className={classes.speakerButton}
-          onClick={handleSpeakerClick(speakers, selectSpeakers)}
-        >
+        <Typography component="p">
           {speakers.map(s => s.name).join(', ')}
-        </Button>
+        </Typography>
       }
       action={
-        <Favorite
-          session={session}
-          isFavorite={isFavorite}
-          toggleFavorite={toggleFavorite}
-        />
+        <div>
+          <Info session={session} selectSession={selectSession} />
+          <Favorite
+            session={session}
+            isFavorite={isFavorite}
+            toggleFavorite={toggleFavorite}
+          />
+        </div>
       }
       className="card-header"
     />
@@ -118,5 +123,5 @@ const mapStateToProps = (state, props) => ({
 
 export default connect(
   mapStateToProps,
-  {toggleFavorite, selectSpeakers},
+  {toggleFavorite, selectSession},
 )(withStyles(styles)(SessionCard));

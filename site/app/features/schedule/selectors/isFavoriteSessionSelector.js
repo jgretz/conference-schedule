@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import {createSelector} from 'reselect';
-import sessionForCardSelector from './sessionForCardSelector';
+import sessionForDetailSelector from './sessionForDetailSelector';
 import favoritesSelector from './favoritesSelector';
 
 export default createSelector(
   favoritesSelector,
-  sessionForCardSelector,
+  sessionForDetailSelector,
   (favorites, session) => _.some(favorites, f => f === session.id),
 );

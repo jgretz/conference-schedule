@@ -13,12 +13,13 @@ const createData = () => ({
 
 // dedup logic
 const dedupData = data => {
+  const sessions = _._.uniqBy(data.sessions, x => x.id);
   const speakers = _._.uniqBy(data.speakers, x => x.id);
   const rooms = _._.uniqBy(data.rooms, x => x.id);
   const tags = _._.uniqBy(data.tags, x => x.id);
 
   return {
-    sessions: data.sessions,
+    sessions,
     speakers,
     rooms,
     tags,
@@ -38,6 +39,7 @@ const parseSessions = (data, $, date, roomId, sessionsDom) => {
     const startTime = times[0];
     const endTime = times[1];
 
+    const id = session.attr('data-sessionid');
     const title = session.find('.sz-session__title a').text();
 
     const sessionSpeakers = [];
@@ -70,6 +72,7 @@ const parseSessions = (data, $, date, roomId, sessionsDom) => {
     });
 
     data.sessions.push({
+      id,
       roomId,
       startTime: `${date} ${startTime} EDT`,
       endTime: `${date} ${endTime} EDT`,
@@ -95,7 +98,7 @@ const parseTracks = (data, $) => day => {
 
     data.rooms.push({id: roomId, name: room});
 
-    parseSessions(data, $, date, roomId, track.find('.sz-session__card'));
+    parseSessions(data, $, date, roomId, track.find('.sz-session'));
   });
 };
 

@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import {createSelector} from 'reselect';
-import sessionForCardSelector from './sessionForCardSelector';
+import sessionForDetailSelector from './sessionForDetailSelector';
 import roomsSelector from './roomsSelector';
 
 export default createSelector(
   roomsSelector,
-  sessionForCardSelector,
+  sessionForDetailSelector,
   (rooms, session) => _.find(rooms, r => r.id === session.roomId),
 );

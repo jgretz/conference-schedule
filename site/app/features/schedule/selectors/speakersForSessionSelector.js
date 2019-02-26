@@ -1,9 +1,9 @@
 import {createSelector} from 'reselect';
-import sessionForCardSelector from './sessionForCardSelector';
+import sessionForDetailSelector from './sessionForDetailSelector';
 import speakersSelector from './speakersSelector';
 
 export default createSelector(
   speakersSelector,
-  sessionForCardSelector,
+  sessionForDetailSelector,
   (speakers, session) => speakers.filter(s => session.speakers.includes(s.id)),
 );

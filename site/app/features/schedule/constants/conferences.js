@@ -1,13 +1,14 @@
 import moment from 'moment';
-import {loadCodeMashData} from '../../codemash/actions';
-import {loadCodeStockData} from '../../codestock/actions';
+import * as codemashActions from '../../codemash/actions';
+import * as codestockActions from '../../codestock/actions';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
 export const CONFERENCES = [
   {
     title: 'CodeStock 2019',
-    loadData: loadCodeStockData,
+    loadData: codestockActions.loadData,
+    loadSessionDetail: codestockActions.loadSessionDetail,
     days: [
       moment('2019-04-12', DATE_FORMAT),
       moment('2019-04-13', DATE_FORMAT),
@@ -15,7 +16,8 @@ export const CONFERENCES = [
   },
   {
     title: 'CodeMash 2019',
-    loadData: loadCodeMashData,
+    loadData: codemashActions.loadData,
+    loadSessionDetail: codemashActions.loadSessionDetail,
     days: [
       moment('2019-01-08', DATE_FORMAT),
       moment('2019-01-09', DATE_FORMAT),

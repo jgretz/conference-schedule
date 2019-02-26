@@ -1,3 +1,4 @@
 export * from './selectDay';
-export * from './selectSpeakers';
+export * from './selectSession';
+export * from './selectSessionModalMode';
 export * from './toggleFavorite';
