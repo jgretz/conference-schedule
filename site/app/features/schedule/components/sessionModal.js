@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import withLifecycle from '@hocs/with-lifecycle';
 import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -32,25 +34,12 @@ import {
   SESSION_SPEAKERS_SELECTED,
 } from '../constants/actions';
 
-const styles = theme => ({
-  paper: {
-    margin: '30px auto',
-    width: '90%',
-    maxWidth: 900,
-    minWidth: 300,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-
+// styles
+const styles = () => ({
   header: {
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
   },
   modeSelection: {
     display: 'flex',
@@ -188,8 +177,6 @@ const Header = ({classes, session, isFavorite, toggleFavorite}) => (
   <div className={classes.header}>
     <Typography variant="title">{session.title}</Typography>
 
-    <div className={classes.grow} />
-
     <IconButton
       aria-label="Add to favorites"
       color={isFavorite ? 'secondary' : 'default'}
@@ -201,17 +188,21 @@ const Header = ({classes, session, isFavorite, toggleFavorite}) => (
 );
 
 const Session = props => (
-  <div>
-    <Header {...props} />
-    <ModeSelection {...props} />
-    <Content {...props} />
-  </div>
+  <Fragment>
+    <DialogTitle id="scroll-dialog-title">
+      <Header {...props} />
+    </DialogTitle>
+    <DialogContent>
+      <ModeSelection {...props} />
+      <Content {...props} />
+    </DialogContent>
+  </Fragment>
 );
 
 const SessionModal = ({
   classes,
-  session,
   modals,
+  session,
 
   selectSession,
   selectSessionModalModeDetail,
@@ -220,24 +211,27 @@ const SessionModal = ({
 }) => {
   const onClose = handleClose(selectSession, selectSessionModalModeDetail);
 
+  if (!session) {
+    return null;
+  }
+
   return (
-    <Modal
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
+    <Dialog
       open={modals.sessionModalVisible}
       onClose={onClose}
-      scroll="paper"
+      scroll="body"
+      aria-labelledby="scroll-dialog-title"
+      maxWidth="md"
+      fullWidth={true}
     >
-      <div className={classes.paper}>
-        <Session
-          classes={classes}
-          session={session}
-          modals={modals}
-          selectSessionModalModeDetail={selectSessionModalModeDetail}
-          {...props}
-        />
-      </div>
-    </Modal>
+      <Session
+        classes={classes}
+        modals={modals}
+        session={session}
+        selectSessionModalModeDetail={selectSessionModalModeDetail}
+        {...props}
+      />
+    </Dialog>
   );
 };
 
