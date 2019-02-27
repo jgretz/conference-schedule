@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Divider from '@material-ui/core/Divider';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   execute,
@@ -28,6 +29,7 @@ import {
   roomForSessionSelector,
   tagsForSessionSelector,
   isFavoriteSessionSelector,
+  loadingSelector,
 } from '../selectors';
 
 import {
@@ -36,7 +38,7 @@ import {
 } from '../constants/actions';
 
 // styles
-const styles = () => ({
+const styles = theme => ({
   header: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -64,15 +66,20 @@ const styles = () => ({
     borderRadius: 25,
   },
 
-  splitRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
   divider: {
     marginTop: 10,
     marginBottom: 10,
+  },
+
+  progressContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    height: '100%',
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
   },
 });
 
@@ -124,14 +131,12 @@ const Speakers = ({classes, speakers}) => {
 
 const SessionDetail = ({classes, speakers, room, tags, session}) => (
   <div>
-    <div className={classes.splitRow}>
-      <div>Room: {room.name}</div>
-      <div>Tags: {tags.map(c => c.name).join(', ')}</div>
-    </div>
+    <div>Room: {room.name}</div>
     <div>
       Speaker{speakers.length === 1 ? '' : 's'}:{' '}
       {speakers.map(s => s.name).join(', ')}
     </div>
+    <div>Tags: {tags.map(c => c.name).join(', ')}</div>
 
     <Divider className={classes.divider} variant="middle" />
 
@@ -143,7 +148,17 @@ const SessionDetail = ({classes, speakers, room, tags, session}) => (
   </div>
 );
 
-const Content = ({modals, ...props}) => {
+const Loading = ({classes}) => (
+  <div className={classes.progressContainer}>
+    <CircularProgress className={classes.progress} />
+  </div>
+);
+
+const Content = ({modals, loading, ...props}) => {
+  if (loading.sessionDetail) {
+    return <Loading {...props} />;
+  }
+
   if (modals.sessionModalMode === SESSION_DETAIL_SELECTED) {
     return <SessionDetail {...props} />;
   }
@@ -250,6 +265,8 @@ const ComposedSessionModal = compose(
 )(SessionModal);
 
 const mapStateToProps = (state, props) => ({
+  loading: loadingSelector(state),
+
   conference: selectedConferenceSelector(state),
   session: selectedSessionSelector(state),
   modals: modalsSelector(state),
