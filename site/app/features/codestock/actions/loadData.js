@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {get} from 'truefit-react-utils';
-import {DATA_URL} from '../constants';
+import {SESSIONS_URL} from '../constants';
 import {
   LOADING_SCHEDULE_DATA,
   LOADED_SCHEDULE_DATA,
@@ -26,7 +26,7 @@ export const loadData = async dispatch => {
   dispatch({type: LOADING_SCHEDULE_DATA});
 
   try {
-    const response = await get(DATA_URL);
+    const response = await get(SESSIONS_URL);
     const payload = mapToSharedModel(response.data);
 
     dispatch({

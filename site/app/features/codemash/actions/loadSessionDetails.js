@@ -1,11 +1,2 @@
-export const loadSessionDetail = (dispatch, store, session) => {
-  if (!session) {
-    return;
-  }
-
-  const detail = {
-    description: session.description,
-  };
-
-  return detail;
-};
+// all detail for codemash comes down on the main data feed
+export const loadSessionDetail = () => {};

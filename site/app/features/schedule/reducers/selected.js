@@ -10,7 +10,7 @@ const defaultDay = getDefaultDayForConference(defaultConference);
 const INITIAL = {
   conference: defaultConference,
   day: defaultDay,
-  session: null,
+  sessionId: null,
 };
 
 export default stateReducer(INITIAL, {
@@ -21,6 +21,6 @@ export default stateReducer(INITIAL, {
 
   [SESSION_SELECTED]: (state, payload) =>
     produce(state, draft => {
-      draft.session = payload;
+      draft.sessionId = payload?.id;
     }),
 });

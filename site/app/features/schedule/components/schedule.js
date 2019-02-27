@@ -7,6 +7,7 @@ import List from './list';
 import DaySelection from './daySelection';
 import SessionModal from './sessionModal';
 
+import {execute} from '../actions';
 import {selectedConferenceSelector} from '../selectors';
 
 const Schedule = () => (
@@ -20,8 +21,8 @@ const Schedule = () => (
 
 const ComposedSchedule = compose(
   withLifecycle({
-    onDidMount({selectedConference, dispatch}) {
-      selectedConference.loadData(dispatch);
+    onDidMount({selectedConference, execute}) {
+      execute(selectedConference.loadData);
     },
   }),
 )(Schedule);
@@ -30,4 +31,7 @@ const mapStateToProps = state => ({
   selectedConference: selectedConferenceSelector(state),
 });
 
-export default connect(mapStateToProps)(ComposedSchedule);
+export default connect(
+  mapStateToProps,
+  {execute},
+)(ComposedSchedule);

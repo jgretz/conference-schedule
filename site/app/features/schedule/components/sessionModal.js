@@ -13,6 +13,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import Divider from '@material-ui/core/Divider';
 
 import {
+  execute,
   selectSession,
   toggleFavorite,
   selectSessionModalModeDetail,
@@ -239,9 +240,10 @@ const SessionModal = ({
 const ComposedSessionModal = compose(
   withLifecycle({
     onDidUpdate(prevProps, props) {
-      if (props.session && prevProps.session !== props.session) {
-        // conference.loadSessionDetail(dispatch, store, session);
-        // console.log(props);
+      if (props.session?.id !== prevProps.session?.id) {
+        const {execute, conference, session} = props;
+
+        execute(conference.loadSessionDetail, session);
       }
     },
   }),
@@ -259,6 +261,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = {
+  execute,
   selectSession,
   toggleFavorite,
   selectSessionModalModeDetail,

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import cheerio from 'cheerio';
 
-const CODESTOCK_URL = 'http://codestock.org/2019-schedule/';
+const SESSIONS_URL = 'http://codestock.org/2019-schedule/';
 
 const createData = () => ({
   sessions: [],
@@ -117,7 +117,7 @@ const parseData = $ => {
 // http route
 export default async (_, res) => {
   try {
-    const html = await axios.get(CODESTOCK_URL);
+    const html = await axios.get(SESSIONS_URL);
     const $ = cheerio.load(html.data);
     const data = parseData($);
 
