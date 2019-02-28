@@ -9,7 +9,7 @@ deploy:
   provider: heroku
   api_key:
     secure: wcoBxUDUGIjAVBazWEltMJOXPtupiefos5iM57ZpwUmY6BzIH4Otkn2rzGm7gU4/mb+oid9hl7ofDxZbwL+PVD2waRo8/FkOuZ4iOf8BH2xgIWNisGt4qvcKlCcR+4/0BpX49GJlA0J9kbU4g64ylqlNXRN88+91sdz+M3EMShCoJIEjmt5bRMAjlbJqz+8Athp9j97NGe3C9w7b094qHcKoRDbazvfkrQQVpSynhXTknsFwtlDTrJGIaoEzsxoWUsG7Hncrkh6AR4+02j7AuFuDwPQBN742gQ+M/V3xxvp3ksJLVphrj7Ky1EfY4pHx3US34L+YGttCB4nwiTdvGflc4aIFUeYErlzggmgC0C/6ojOwIyjdNZNEFmqpowDcwwblgzZ4ugy3oAvv55Zoq3sE6SCB21OAgnsM/VM1GX83iPYy+4aF+QcMISBnzwMoinmj5eK7/25YeZCl1CdzBKHxTI8YQACdNSBSPaY/Et6edKoeLKmnCtYSbn5sj3GWzZ2GwpWT/Knnj5BibcjHBK/+3vYsVmILTTQHciTXZOf37qqaWpy/QTgHrqDi6CoPkRlf2TAOqSHABodplWN726uPEL7/YtNlDkVjvlnGLP03uO9TBF9z11O7AWcU+plxQmUP2BNVnjYOLIa4dMdrXpMRoCftorFv9uzF4FV6HQU=
-  app: conference-schedule
+  app: altconfschedule
   skip_cleanup: true
   on:
     repo: jgretz/conference-schedule
