@@ -11,3 +11,11 @@
     padding-bottom: 0px;
   }
 }
+
+.session-modal div div:only-child {
+  @media screen and (max-width: 800px) {
+    max-width: 95%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}

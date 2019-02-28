@@ -239,6 +239,7 @@ const SessionModal = ({
       aria-labelledby="scroll-dialog-title"
       maxWidth="md"
       fullWidth={true}
+      className="session-modal"
     >
       <Session
         classes={classes}
