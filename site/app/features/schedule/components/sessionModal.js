@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'recompose';
 import withLifecycle from '@hocs/with-lifecycle';
 import {withStyles} from '@material-ui/core/styles';
+import WorkerImage from 'react-sw-img';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -37,6 +38,8 @@ import {
   SESSION_DETAIL_SELECTED,
   SESSION_SPEAKERS_SELECTED,
 } from '../constants/actions';
+
+import {AVATAR} from '../constants/misc';
 
 // styles
 const styles = () => ({
@@ -99,8 +102,9 @@ const Speakers = ({classes, speakers}) => {
       {speakers.map((speaker, i) => (
         <div key={speaker.id}>
           <div className={classes.speakerTitle}>
-            <img
+            <WorkerImage
               alt={speaker.name}
+              placeholder={AVATAR}
               src={speaker.profilePicture}
               className={classes.avatar}
             />
@@ -140,7 +144,7 @@ const SessionDetail = ({classes, speakers, room, tags, session}) => (
 
 const Content = ({modals, loading, ...props}) => {
   if (loading.sessionDetail) {
-    return <Loading {...props} />;
+    return <Loading />;
   }
 
   if (modals.sessionModalMode === SESSION_DETAIL_SELECTED) {

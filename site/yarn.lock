@@ -7352,6 +7352,11 @@ react-router@^4.3.1:
     prop-types "^15.6.1"
     warning "^4.0.1"
 
+react-sw-img@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-sw-img/-/react-sw-img-1.0.1.tgz#1929be391c29cbade4935491fadabb9e96d95ecb"
+  integrity sha512-jTMvbQ2vFat8GtkWyF5dU4KLSuPFCCTblKnnJyGFJWNda8cEVtr0VOKX3/LHJhcVGTyHw0CX8DklZZbYMikgsA==
+
 react-transform-catch-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-transform-catch-errors/-/react-transform-catch-errors-1.0.2.tgz#1b4d4a76e97271896fc16fe3086c793ec88a9eeb"
