@@ -13,6 +13,7 @@ export const CONFERENCES = [
       moment('2019-04-12', DATE_FORMAT),
       moment('2019-04-13', DATE_FORMAT),
     ],
+    tags: ['codestock'],
   },
   {
     title: 'CodeMash 2019',
@@ -24,5 +25,6 @@ export const CONFERENCES = [
       moment('2019-01-10', DATE_FORMAT),
       moment('2019-01-11', DATE_FORMAT),
     ],
+    tags: ['codemash'],
   },
 ];
