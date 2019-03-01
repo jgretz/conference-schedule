@@ -11,7 +11,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Divider from '@material-ui/core/Divider';
-import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Loading from './loading';
 
 import {
   execute,
@@ -38,7 +39,7 @@ import {
 } from '../constants/actions';
 
 // styles
-const styles = theme => ({
+const styles = () => ({
   header: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -69,17 +70,6 @@ const styles = theme => ({
   divider: {
     marginTop: 10,
     marginBottom: 10,
-  },
-
-  progressContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    height: '100%',
-  },
-  progress: {
-    margin: theme.spacing.unit * 2,
   },
 });
 
@@ -145,12 +135,6 @@ const SessionDetail = ({classes, speakers, room, tags, session}) => (
       variant="body2"
       dangerouslySetInnerHTML={{__html: session.description}}
     />
-  </div>
-);
-
-const Loading = ({classes}) => (
-  <div className={classes.progressContainer}>
-    <CircularProgress className={classes.progress} />
   </div>
 );
 

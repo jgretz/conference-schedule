@@ -6,6 +6,7 @@ import withLifecycle from '@hocs/with-lifecycle';
 import List from './list';
 import DaySelection from './daySelection';
 import SessionModal from './sessionModal';
+import ConferenceModal from './conferenceModal';
 
 import {execute} from '../actions';
 import {selectedConferenceSelector} from '../selectors';
@@ -16,6 +17,7 @@ const Schedule = () => (
     <List />
 
     <SessionModal />
+    <ConferenceModal />
   </div>
 );
 
@@ -23,6 +25,12 @@ const ComposedSchedule = compose(
   withLifecycle({
     onDidMount({selectedConference, execute}) {
       execute(selectedConference.loadData);
+    },
+
+    onDidUpdate(prevProps, {selectedConference, execute}) {
+      if (selectedConference !== prevProps.selectedConference) {
+        execute(selectedConference.loadData);
+      }
     },
   }),
 )(Schedule);

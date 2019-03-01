@@ -5,8 +5,9 @@ import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import Loading from './loading';
 import SessionCard from './sessionCard';
-import {sessionsForSelectedDaySelector} from '../selectors';
+import {sessionsForSelectedDaySelector, loadingSelector} from '../selectors';
 
 const styles = () => ({
   root: {
@@ -27,24 +28,30 @@ const groupSessions = sessions => {
   }));
 };
 
-const renderSessionCard = session => (
-  <SessionCard key={session.id} session={session} />
-);
-
-const renderSessionGroup = classes => group => (
-  <div key={group.time} className={classes.group}>
+// render
+const SessionGroup = ({classes, group}) => (
+  <div className={classes.group}>
     <h2>{moment(group.time).format('dddd @ h:mm A')}</h2>
-    {group.sessions.map(renderSessionCard)}
+    {group.sessions.map(session => (
+      <SessionCard key={session.id} session={session} />
+    ))}
   </div>
 );
 
-const List = ({classes, sessions}) => {
+const List = ({classes, sessions, loading}) => {
+  if (loading.scheduleData) {
+    return <Loading />;
+  }
+
   const sessionGroups = groupSessions(sessions);
+
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={12} className={classes.grid}>
-          {sessionGroups.map(renderSessionGroup(classes))}
+          {sessionGroups.map(group => (
+            <SessionGroup key={group.time} group={group} classes={classes} />
+          ))}
         </Grid>
       </Grid>
     </div>
@@ -55,6 +62,7 @@ const StyledList = withStyles(styles)(List);
 
 const mapStateToProps = state => ({
   sessions: sessionsForSelectedDaySelector(state),
+  loading: loadingSelector(state),
 });
 
 export default connect(mapStateToProps)(StyledList);

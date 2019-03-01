@@ -1,7 +1,11 @@
 import produce from 'immer';
 import {stateReducer} from 'truefit-react-utils';
 
-import {DAY_SELECTED, SESSION_SELECTED} from '../constants/actions';
+import {
+  CONFERENCE_SELECTED,
+  DAY_SELECTED,
+  SESSION_SELECTED,
+} from '../constants/actions';
 import {getDefaultConference, getDefaultDayForConference} from '../services';
 
 const defaultConference = getDefaultConference();
@@ -14,6 +18,11 @@ const INITIAL = {
 };
 
 export default stateReducer(INITIAL, {
+  [CONFERENCE_SELECTED]: (state, payload) =>
+    produce(state, draft => {
+      draft.conference = payload;
+    }),
+
   [DAY_SELECTED]: (state, payload) =>
     produce(state, draft => {
       draft.day = payload;

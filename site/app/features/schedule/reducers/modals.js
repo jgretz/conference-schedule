@@ -5,11 +5,14 @@ import {
   SESSION_SELECTED,
   SESSION_DETAIL_SELECTED,
   SESSION_SPEAKERS_SELECTED,
+  TOGGLE_CONFERENCE_MODAL,
 } from '../constants/actions';
 
 const INITIAL = {
   sessionModalVisible: false,
   sessionModalMode: SESSION_DETAIL_SELECTED,
+
+  conferenceModalVisible: false,
 };
 
 export default stateReducer(INITIAL, {
@@ -26,5 +29,10 @@ export default stateReducer(INITIAL, {
   [SESSION_SPEAKERS_SELECTED]: state =>
     produce(state, draft => {
       draft.sessionModalMode = SESSION_SPEAKERS_SELECTED;
+    }),
+
+  [TOGGLE_CONFERENCE_MODAL]: state =>
+    produce(state, draft => {
+      draft.conferenceModalVisible = !state.conferenceModalVisible;
     }),
 });
