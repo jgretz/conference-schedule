@@ -1,10 +1,18 @@
 import moment from 'moment';
 import * as codemashActions from '../../codemash/actions';
 import * as codestockActions from '../../codestock/actions';
+import * as stirtrekActions from '../../stirtrek/actions';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
 export const CONFERENCES = [
+  {
+    title: 'StirTrek 2019',
+    loadData: stirtrekActions.loadData,
+    loadSessionDetail: stirtrekActions.loadSessionDetail,
+    days: [moment('2019-04-26', DATE_FORMAT)],
+    tags: ['stirtrek'],
+  },
   {
     title: 'CodeStock 2019',
     loadData: codestockActions.loadData,
