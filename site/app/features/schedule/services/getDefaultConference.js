@@ -1,5 +1,9 @@
 import _ from 'lodash';
 import moment from 'moment';
+
+import {getItemFromStorage} from '../../shared/services';
+
+import {CONFERENCE} from '../constants/actions';
 import {CONFERENCES} from '../constants/conferences';
 
 const nearestConference = () => {
@@ -11,9 +15,20 @@ const nearestConference = () => {
   return noPast.length >= 0 ? noPast[0] : null;
 };
 
+const selectedConference = () => {
+  const title = getItemFromStorage(CONFERENCE);
+  if (!title) {
+    return null;
+  }
+
+  return _.find(CONFERENCES, c => c.title === title);
+};
+
 export default () => {
   const slug = _.trimStart(window.location.pathname, '/').toLowerCase();
   const conference = _.find(CONFERENCES, c => c.tags.includes(slug));
 
-  return conference || nearestConference() || CONFERENCES[0];
+  return (
+    conference || selectedConference() || nearestConference() || CONFERENCES[0]
+  );
 };
