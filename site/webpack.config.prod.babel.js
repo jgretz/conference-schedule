@@ -64,6 +64,10 @@ export default {
               '@babel/plugin-proposal-object-rest-spread',
               '@babel/plugin-external-helpers',
               '@babel/plugin-proposal-optional-chaining',
+              [
+                '@babel/plugin-proposal-pipeline-operator',
+                {proposal: 'minimal'},
+              ],
               'babel-plugin-transform-react-remove-prop-types',
             ],
           },

@@ -49,6 +49,10 @@ export default {
               '@babel/plugin-proposal-object-rest-spread',
               '@babel/plugin-external-helpers',
               '@babel/plugin-proposal-optional-chaining',
+              [
+                '@babel/plugin-proposal-pipeline-operator',
+                {proposal: 'minimal'},
+              ],
               'react-hot-loader/babel',
             ],
           },
