@@ -11,15 +11,17 @@ import ConferenceModal from './conferenceModal';
 import {execute} from '../actions';
 import {selectedConferenceSelector} from '../selectors';
 
-const Schedule = () => (
-  <div className="schedule">
-    <DaySelection />
-    <List />
+const Schedule = () => {
+  return (
+    <div className="schedule">
+      <DaySelection />
+      <List />
 
-    <SessionModal />
-    <ConferenceModal />
-  </div>
-);
+      <SessionModal />
+      <ConferenceModal />
+    </div>
+  );
+};
 
 const ComposedSchedule = compose(
   withLifecycle({

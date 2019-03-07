@@ -5,4 +5,3 @@ export {default as Loading} from './loading';
 export {default as Schedule} from './schedule';
 export {default as SessionCard} from './sessionCard';
 export {default as SessionModal} from './sessionModal';
-export {default as TitleBar} from './titleBar';

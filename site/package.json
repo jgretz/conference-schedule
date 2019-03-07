@@ -54,7 +54,8 @@
     "redux-promise-middleware": "^6.1.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "truefit-react-utils": "^0.0.15"
+    "truefit-react-utils": "^0.0.15",
+    "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

@@ -1,6 +1,7 @@
 import '@babel/polyfill';
 import './babelHelpers';
 
+import 'typeface-roboto';
 import './styles/styles.scss';
 
 import React from 'react';
