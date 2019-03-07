@@ -33,8 +33,8 @@
     "eslint": "^5.13.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.12.4",
-    "nodemon": "^1.18.9",
-    "pretty-format": "^24.0.0",
+    "nodemon": "^1.18.10",
+    "pretty-format": "^24.3.0",
     "shelljs": "^0.8.3"
   }
 }
