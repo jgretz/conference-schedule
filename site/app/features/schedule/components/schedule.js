@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {compose} from 'recompose';
-import withLifecycle from '@hocs/with-lifecycle';
+import {pipe, lifecycle} from '@synvox/rehook';
 
 import List from './list';
 import DaySelection from './daySelection';
@@ -23,19 +22,24 @@ const Schedule = () => {
   );
 };
 
-const ComposedSchedule = compose(
-  withLifecycle({
-    onDidMount({selectedConference, execute}) {
+const ComposedSchedule = pipe(
+  lifecycle({
+    componentDidMount() {
+      const {selectedConference, execute} = this.props;
+
       execute(selectedConference.loadData);
     },
 
-    onDidUpdate(prevProps, {selectedConference, execute}) {
-      if (selectedConference !== prevProps.selectedConference) {
+    componentDidUpdate(prevProps) {
+      const {selectedConference, execute} = this.props;
+      if (prevProps && prevProps.selectedConference !== selectedConference) {
         execute(selectedConference.loadData);
       }
     },
   }),
-)(Schedule);
+
+  Schedule,
+);
 
 const mapStateToProps = state => ({
   selectedConference: selectedConferenceSelector(state),

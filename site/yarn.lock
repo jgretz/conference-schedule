@@ -785,13 +785,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@hocs/with-lifecycle@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@hocs/with-lifecycle/-/with-lifecycle-0.5.0.tgz#358db86746be1ade689916a2ca0d7d5cbeef1a92"
-  integrity sha512-gf8pxJO3dovuEeJ3zLdOTGcE8z9fkAy2SEhDtf57zMrlU7hXCkOa6P9RR992FXjuJXTyb445Zk6QNrgpi2aw6Q==
-  dependencies:
-    react-display-name "^0.2.4"
-
 "@hot-loader/react-dom@16.8.4":
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/@hot-loader/react-dom/-/react-dom-16.8.4.tgz#aefe598ca26005c1ec3ac11d92d54ff3c1cd219c"
@@ -868,6 +861,11 @@
   integrity sha512-MI4Xx6LHs4Webyvi6EbspgyAb4D2Q2VtnCQ1blOJcoLS6mVa8lNN2rkIy1CVxfTUpoyIbCTkXES1rLXztFD1lg==
   dependencies:
     any-observable "^0.3.0"
+
+"@synvox/rehook@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@synvox/rehook/-/rehook-0.0.14.tgz#d620cebd447df7e4beb6544d826590daf16d1113"
+  integrity sha512-cJVGNNZCm5jkvf1usWLpToCYsY3m560MegPhT+tL7GQLEzEsDXpBa0hsaE5Y5FZ9e07Vje1/s457v2oLBKHojQ==
 
 "@types/jss@^9.5.6":
   version "9.5.8"
@@ -6928,11 +6926,6 @@ react-deep-force-update@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.1.2.tgz#3d2ae45c2c9040cbb1772be52f8ea1ade6ca2ee1"
   integrity sha512-WUSQJ4P/wWcusaH+zZmbECOk7H5N2pOIl0vzheeornkIMhu+qrNdGFm0bDZLCb0hSF0jf/kH1SgkNGfBdTc4wA==
 
-react-display-name@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/react-display-name/-/react-display-name-0.2.4.tgz#e2a670b81d79a2204335510c01246f4c92ff12cf"
-  integrity sha512-zvU6iouW+SWwHTyThwxGICjJYCMZFk/6r/+jmOdC7ntQoPlS/Pqb81MkxaMf2bHTSq9TN3K3zX2/ayMW/jCtyA==
-
 react-dom@^16.8.4:
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.4.tgz#1061a8e01a2b3b0c8160037441c3bf00a0e3bc48"
@@ -7143,7 +7136,7 @@ readdirp@^2.2.1:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
-"recompose@0.28.0 - 0.30.0", recompose@^0.30.0:
+"recompose@0.28.0 - 0.30.0":
   version "0.30.0"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.30.0.tgz#82773641b3927e8c7d24a0d87d65aeeba18aabd0"
   integrity sha512-ZTrzzUDa9AqUIhRk4KmVFihH0rapdCSMFXjhHbNrjAWxBuUD/guYlyysMnuHjlZC/KRiOKRtB4jf96yYSkKE8w==

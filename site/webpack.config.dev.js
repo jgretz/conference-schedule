@@ -35,7 +35,7 @@ export default {
                 {
                   useBuiltIns: 'entry',
                   modules: false,
-                  forceAllTransforms: true,
+                  forceAllTransforms: false,
                 },
               ],
               '@babel/preset-react',

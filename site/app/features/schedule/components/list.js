@@ -2,12 +2,17 @@ import _ from 'lodash';
 import moment from 'moment';
 import React from 'react';
 import {connect} from 'react-redux';
+
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
 import Loading from './loading';
 import SessionCard from './sessionCard';
-import {sessionsForSelectedDaySelector, loadingSelector} from '../selectors';
+import {
+  sessionsForSelectedDaySelector,
+  loadingScheduleSelector,
+} from '../selectors';
+
+import {DATA_STATE} from '../constants/misc';
 
 const styles = () => ({
   root: {
@@ -19,6 +24,7 @@ const styles = () => ({
   },
 });
 
+// helpers
 const groupSessions = sessions => {
   const times = _.uniq(sessions.map(s => s.startTime));
 
@@ -38,11 +44,7 @@ const SessionGroup = ({classes, group}) => (
   </div>
 );
 
-const List = ({classes, sessions, loading}) => {
-  if (loading.scheduleData) {
-    return <Loading />;
-  }
-
+const ListGrid = ({classes, sessions}) => {
   const sessionGroups = groupSessions(sessions);
 
   return (
@@ -58,11 +60,17 @@ const List = ({classes, sessions, loading}) => {
   );
 };
 
+const List = ({classes, loadingState, ...props}) =>
+  ({
+    [DATA_STATE.LOADING_DATA_NONE_CACHED]: <Loading />,
+    [DATA_STATE.READY]: <ListGrid classes={classes} {...props} />,
+  }[loadingState]);
+
 const StyledList = withStyles(styles)(List);
 
 const mapStateToProps = state => ({
   sessions: sessionsForSelectedDaySelector(state),
-  loading: loadingSelector(state),
+  loadingState: loadingScheduleSelector(state),
 });
 
 export default connect(mapStateToProps)(StyledList);

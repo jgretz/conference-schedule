@@ -1,5 +1,6 @@
 export {default as favoritesSelector} from './favoritesSelector';
 export {default as isFavoriteSessionSelector} from './isFavoriteSessionSelector';
+export {default as loadingScheduleSelector} from './loadingScheduleSelector';
 export {default as loadingSelector} from './loadingSelector';
 export {default as modalsSelector} from './modalsSelector';
 export {default as roomForSessionSelector} from './roomForSessionSelector';

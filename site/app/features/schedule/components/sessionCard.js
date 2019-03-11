@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {pipe, withHandlers} from '@synvox/rehook';
+
 import {withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -10,7 +12,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import InfoIcon from '@material-ui/icons/Info';
 
 import {toggleFavorite, selectSession} from '../actions';
-
 import {
   speakersForSessionSelector,
   roomForSessionSelector,
@@ -18,6 +19,7 @@ import {
   isFavoriteSessionSelector,
 } from '../selectors';
 
+// styles
 const styles = () => ({
   card: {
     marginBottom: 20,
@@ -41,29 +43,19 @@ const styles = () => ({
   },
 });
 
-const handleInfoClick = (session, selectSession) => () => {
-  selectSession(session);
-};
-
-const handleFavoriteClick = (session, toggleFavorite) => () => {
-  toggleFavorite(session.id);
-};
-
-const Favorite = ({session, isFavorite, toggleFavorite}) => (
+// render
+const Favorite = ({isFavorite, handleFavoriteClick}) => (
   <IconButton
     aria-label="Add to favorites"
     color={isFavorite ? 'secondary' : 'default'}
-    onClick={handleFavoriteClick(session, toggleFavorite)}
+    onClick={handleFavoriteClick}
   >
     <FavoriteIcon />
   </IconButton>
 );
 
-const Info = ({session, selectSession}) => (
-  <IconButton
-    aria-label="More Info"
-    onClick={handleInfoClick(session, selectSession)}
-  >
+const Info = ({handleInfoClick}) => (
+  <IconButton aria-label="More Info" onClick={handleInfoClick}>
     <InfoIcon />
   </IconButton>
 );
@@ -83,12 +75,8 @@ const SessionCard = ({
   classes,
   session,
   speakers,
-  room,
-  tags,
-  isFavorite,
 
-  toggleFavorite,
-  selectSession,
+  ...props
 }) => (
   <Card className={classes.card}>
     <CardHeader
@@ -100,20 +88,32 @@ const SessionCard = ({
       }
       action={
         <div>
-          <Info session={session} selectSession={selectSession} />
-          <Favorite
-            session={session}
-            isFavorite={isFavorite}
-            toggleFavorite={toggleFavorite}
-          />
+          <Info session={session} {...props} />
+          <Favorite session={session} {...props} />
         </div>
       }
       className="card-header"
     />
-    <Content session={session} room={room} tags={tags} classes={classes} />
+    <Content classes={classes} session={session} {...props} />
   </Card>
 );
 
+// hooks
+const ComposedSessionCard = pipe(
+  withHandlers({
+    handleInfoClick: ({selectSession, session}) => () => {
+      selectSession(session);
+    },
+
+    handleFavoriteClick: ({toggleFavorite, session}) => () => {
+      toggleFavorite(session.id);
+    },
+  }),
+
+  SessionCard,
+);
+
+// redux
 const mapStateToProps = (state, props) => ({
   speakers: speakersForSessionSelector(state, props),
   room: roomForSessionSelector(state, props),
@@ -124,4 +124,4 @@ const mapStateToProps = (state, props) => ({
 export default connect(
   mapStateToProps,
   {toggleFavorite, selectSession},
-)(withStyles(styles)(SessionCard));
+)(withStyles(styles)(ComposedSessionCard));

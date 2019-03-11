@@ -25,6 +25,7 @@
     "react/prop-types": ["error", {"skipUndeclared": true}],
     "react/display-name": 0,
     "react/jsx-no-target-blank": 0,
-    "import/no-named-as-default": 0
+    "import/no-named-as-default": 0,
+    "no-unused-vars": ["error", {"varsIgnorePattern": "[_]"}]
   }
 }

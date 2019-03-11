@@ -2,33 +2,41 @@ import React from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import Button from '@material-ui/core/Button';
+import {pipe, withHandlers} from '@synvox/rehook';
 
 import {selectDay} from '../actions';
 import {selectedConferenceSelector, selectedDaySelector} from '../selectors';
 
-const handleDayClick = (day, selectDay) => () => {
-  selectDay(day);
-};
-
+// Day Component
 const colorForDay = (day, selectedDay) =>
   day.isSame(selectedDay, 'day') ? 'primary' : 'default';
 
-const renderDay = ({selectedDay, selectDay}) => day => (
-  <Button
-    key={day}
-    color={colorForDay(day, selectedDay)}
-    onClick={handleDayClick(day, selectDay)}
-  >
+const Day = ({day, selectedDay, handleDayClick}) => (
+  <Button color={colorForDay(day, selectedDay)} onClick={handleDayClick}>
     {moment(day).format('dddd')}
   </Button>
 );
 
-const Days = ({selectedConference, ...props}) => {
-  const days = selectedConference.days.map(renderDay(props));
+const ComposedDay = pipe(
+  withHandlers({
+    handleDayClick: ({day, selectDay}) => () => {
+      selectDay(day);
+    },
+  }),
 
-  return <div className="day-select">{days}</div>;
-};
+  Day,
+);
 
+// Days List
+const Days = ({selectedConference, ...props}) => (
+  <div className="day-select">
+    {selectedConference.days.map(day => (
+      <ComposedDay key={day} day={day} {...props} />
+    ))}
+  </div>
+);
+
+// redux
 const mapStateToProps = state => ({
   selectedConference: selectedConferenceSelector(state),
   selectedDay: selectedDaySelector(state),

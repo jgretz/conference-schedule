@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
-import {compose} from 'recompose';
-import withLifecycle from '@hocs/with-lifecycle';
-import {withStyles} from '@material-ui/core/styles';
+import {pipe, withHandlers, lifecycle} from '@synvox/rehook';
+
 import WorkerImage from 'react-sw-img';
+import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -79,16 +79,6 @@ const styles = () => ({
 // helpers
 const colorForButton = (modals, value) =>
   modals.sessionModalMode === value ? 'secondary' : 'default';
-
-// actions
-const handleClose = (selectSession, selectSessionModalModeDetail) => () => {
-  selectSession(null);
-  selectSessionModalModeDetail();
-};
-
-const handleFavoriteClick = (session, toggleFavorite) => () => {
-  toggleFavorite(session.id);
-};
 
 // render
 const Speakers = ({classes, speakers}) => {
@@ -177,14 +167,14 @@ const ModeSelection = ({
   </div>
 );
 
-const Header = ({classes, session, isFavorite, toggleFavorite}) => (
+const Header = ({classes, session, isFavorite, handleFavoriteClick}) => (
   <div className={classes.header}>
     <Typography variant="title">{session.title}</Typography>
 
     <IconButton
       aria-label="Add to favorites"
       color={isFavorite ? 'secondary' : 'default'}
-      onClick={handleFavoriteClick(session, toggleFavorite)}
+      onClick={handleFavoriteClick}
     >
       <FavoriteIcon />
     </IconButton>
@@ -208,13 +198,10 @@ const SessionModal = ({
   modals,
   session,
 
-  selectSession,
-  selectSessionModalModeDetail,
+  handleClose,
 
   ...props
 }) => {
-  const onClose = handleClose(selectSession, selectSessionModalModeDetail);
-
   if (!session) {
     return null;
   }
@@ -222,7 +209,7 @@ const SessionModal = ({
   return (
     <Dialog
       open={modals.sessionModalVisible}
-      onClose={onClose}
+      onClose={handleClose}
       scroll="body"
       aria-labelledby="scroll-dialog-title"
       maxWidth="md"
@@ -233,26 +220,39 @@ const SessionModal = ({
         classes={classes}
         modals={modals}
         session={session}
-        selectSessionModalModeDetail={selectSessionModalModeDetail}
+        handleClose={handleClose}
         {...props}
       />
     </Dialog>
   );
 };
 
-// HOC build
-const ComposedSessionModal = compose(
-  withLifecycle({
-    onDidUpdate(prevProps, props) {
-      if (props.session?.id !== prevProps.session?.id) {
-        const {execute, conference, session} = props;
+// hooks
+const ComposedSessionModal = pipe(
+  lifecycle({
+    componentDidUpdate(prevProps) {
+      const {execute, conference, session} = this.props;
 
+      if (!prevProps || prevProps.session?.id !== session?.id) {
         execute(conference.loadSessionDetail, session);
       }
     },
   }),
-)(SessionModal);
+  withHandlers({
+    handleClose: ({selectSession, selectSessionModalModeDetail}) => () => {
+      selectSession(null);
+      selectSessionModalModeDetail();
+    },
 
+    handleFavoriteClick: ({session, toggleFavorite}) => () => {
+      toggleFavorite(session.id);
+    },
+  }),
+
+  SessionModal,
+);
+
+// redux
 const mapStateToProps = (state, props) => ({
   loading: loadingSelector(state),
 

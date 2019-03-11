@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {pipe, withHandlers} from '@synvox/rehook';
+
 import {withStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,39 +13,31 @@ import {toggleConferenceModal, selectConference} from '../actions';
 import {modalsSelector} from '../selectors';
 import {CONFERENCES} from '../constants/conferences';
 
-// styling
-const styles = {};
-
-// actions
-const handleClose = toggleConferenceModal => () => {
-  toggleConferenceModal();
-};
-
-const handleSelectConference = (
-  conference,
-  toggleConferenceModal,
-  selectConference,
-) => () => {
-  selectConference(conference);
-  toggleConferenceModal();
-};
-
-// render
-const Conference = ({conference, toggleConferenceModal, selectConference}) => (
-  <ListItem
-    button
-    onClick={handleSelectConference(
-      conference,
-      toggleConferenceModal,
-      selectConference,
-    )}
-  >
+// Conference Component
+const Conference = ({conference, handleSelectConference}) => (
+  <ListItem button onClick={handleSelectConference}>
     <ListItemText primary={conference.title} />
   </ListItem>
 );
 
-const Cancel = ({toggleConferenceModal}) => (
-  <ListItem button onClick={handleClose(toggleConferenceModal)}>
+const ComposedConference = pipe(
+  withHandlers({
+    handleSelectConference: ({
+      conference,
+      toggleConferenceModal,
+      selectConference,
+    }) => () => {
+      selectConference(conference);
+      toggleConferenceModal();
+    },
+  }),
+
+  Conference,
+);
+
+// render
+const Cancel = ({handleClose}) => (
+  <ListItem button onClick={handleClose}>
     <ListItemText primary="Cancel" />
   </ListItem>
 );
@@ -51,29 +45,37 @@ const Cancel = ({toggleConferenceModal}) => (
 const ConferenceList = props => (
   <List>
     {CONFERENCES.map(conf => (
-      <Conference key={conf.title} conference={conf} {...props} />
+      <ComposedConference key={conf.title} conference={conf} {...props} />
     ))}
     <Cancel key="Cancel" {...props} />
   </List>
 );
 
-const ConferenceModal = ({modals, toggleConferenceModal, ...props}) => (
+const ConferenceModal = ({modals, handleClose, ...props}) => (
   <Dialog
     open={modals.conferenceModalVisible}
-    onClose={handleClose(toggleConferenceModal)}
+    onClose={handleClose}
     aria-labelledby="conf-dialog-title"
   >
     <DialogTitle id="conf-dialog-title">Select A Conference</DialogTitle>
     <div>
-      <ConferenceList
-        toggleConferenceModal={toggleConferenceModal}
-        {...props}
-      />
+      <ConferenceList handleClose={handleClose} {...props} />
     </div>
   </Dialog>
 );
 
-// build up
+// hooks
+const ComposedConferenceModal = pipe(
+  withHandlers({
+    handleClose: ({toggleConferenceModal}) => () => {
+      toggleConferenceModal();
+    },
+  }),
+
+  ConferenceModal,
+);
+
+// redux
 const mapStateToProps = state => ({
   modals: modalsSelector(state),
 });
@@ -86,4 +88,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withStyles(styles)(ConferenceModal));
+)(withStyles({})(ComposedConferenceModal));
