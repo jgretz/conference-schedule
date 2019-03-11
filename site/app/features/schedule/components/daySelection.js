@@ -4,8 +4,18 @@ import {connect} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {pipe, withHandlers} from '@synvox/rehook';
 
+import {withStyles} from '@material-ui/core/styles';
 import {selectDay} from '../actions';
 import {selectedConferenceSelector, selectedDaySelector} from '../selectors';
+
+// styles
+const styles = {
+  daySelect: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+};
 
 // Day Component
 const colorForDay = (day, selectedDay) =>
@@ -28,8 +38,8 @@ const ComposedDay = pipe(
 );
 
 // Days List
-const Days = ({selectedConference, ...props}) => (
-  <div className="day-select">
+const Days = ({classes, selectedConference, ...props}) => (
+  <div className={classes.daySelect}>
     {selectedConference.days.map(day => (
       <ComposedDay key={day} day={day} {...props} />
     ))}
@@ -45,4 +55,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {selectDay},
-)(Days);
+)(withStyles(styles)(Days));

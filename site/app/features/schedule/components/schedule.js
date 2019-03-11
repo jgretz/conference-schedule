@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {pipe, lifecycle} from '@synvox/rehook';
 
+import {withStyles} from '@material-ui/core/styles';
 import List from './list';
 import DaySelection from './daySelection';
 import SessionModal from './sessionModal';
@@ -10,9 +11,17 @@ import ConferenceModal from './conferenceModal';
 import {execute} from '../actions';
 import {selectedConferenceSelector} from '../selectors';
 
-const Schedule = () => {
+// styles
+const styles = {
+  schedule: {
+    margin: '20px 20px 0 20px',
+  },
+};
+
+// render
+const Schedule = ({classes}) => {
   return (
-    <div className="schedule">
+    <div className={classes.schedule}>
       <DaySelection />
       <List />
 
@@ -48,4 +57,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {execute},
-)(ComposedSchedule);
+)(withStyles(styles)(ComposedSchedule));

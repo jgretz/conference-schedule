@@ -92,7 +92,6 @@ const SessionCard = ({
           <Favorite session={session} {...props} />
         </div>
       }
-      className="card-header"
     />
     <Content classes={classes} session={session} {...props} />
   </Card>

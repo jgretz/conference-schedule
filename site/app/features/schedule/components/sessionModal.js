@@ -43,6 +43,10 @@ import {AVATAR} from '../constants/misc';
 
 // styles
 const styles = () => ({
+  dialogTitle: {
+    paddingBottom: 0,
+  },
+
   header: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -183,7 +187,7 @@ const Header = ({classes, session, isFavorite, handleFavoriteClick}) => (
 
 const Session = props => (
   <Fragment>
-    <DialogTitle id="scroll-dialog-title">
+    <DialogTitle id="scroll-dialog-title" className={props.classes.dialogTitle}>
       <Header {...props} />
     </DialogTitle>
     <DialogContent>
