@@ -10,19 +10,28 @@ import {themeSelector} from './features/shared/selectors';
 import {THEMES} from './features/shared/constants';
 
 // themes
-const createTheme = type =>
+const createTheme = (type, primary, secondary) =>
   createMuiTheme({
     palette: {
       type,
+      primary: {
+        main: primary,
+      },
+      secondary: {
+        main: secondary,
+      },
     },
     typography: {
       useNextVariants: true,
     },
   });
 
+const SCARLET = '#bb0000';
+const GRAY = '#666';
+
 const THEME_MAP = {
-  [THEMES.LIGHT]: createTheme(THEMES.LIGHT),
-  [THEMES.DARK]: createTheme(THEMES.DARK),
+  [THEMES.LIGHT]: createTheme(THEMES.LIGHT, SCARLET, GRAY),
+  [THEMES.DARK]: createTheme(THEMES.DARK, SCARLET, GRAY),
 };
 
 // render
