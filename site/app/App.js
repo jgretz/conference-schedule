@@ -26,12 +26,12 @@ const createTheme = (type, primary, secondary) =>
     },
   });
 
-const SCARLET = '#bb0000';
-const GRAY = '#666';
+const PRIMARY = '#d65828';
+const SECONDARY = '#ebac94';
 
 const THEME_MAP = {
-  [THEMES.LIGHT]: createTheme(THEMES.LIGHT, SCARLET, GRAY),
-  [THEMES.DARK]: createTheme(THEMES.DARK, SCARLET, GRAY),
+  [THEMES.LIGHT]: createTheme(THEMES.LIGHT, PRIMARY, SECONDARY),
+  [THEMES.DARK]: createTheme(THEMES.DARK, PRIMARY, SECONDARY),
 };
 
 // render
