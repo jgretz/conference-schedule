@@ -1,7 +1,7 @@
 /* eslint-disable sort-imports */
 import {combineReducers} from 'redux';
-import favoritesFilter from './favoritesFilter.js';
+import flags from './flags.js';
 
 export default combineReducers({
-  favoritesFilter,
+  flags,
 });

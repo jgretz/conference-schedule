@@ -3,5 +3,5 @@ import flagsSelector from './flagsSelector';
 
 export default createSelector(
   flagsSelector,
-  flags => flags.filterToFavorites,
+  flags => flags.theme,
 );

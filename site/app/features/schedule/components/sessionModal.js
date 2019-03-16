@@ -82,7 +82,7 @@ const styles = () => ({
 
 // helpers
 const colorForButton = (modals, value) =>
-  modals.sessionModalMode === value ? 'secondary' : 'default';
+  modals.sessionModalMode === value ? 'primary' : 'default';
 
 // render
 const Speakers = ({classes, speakers}) => {
@@ -102,7 +102,7 @@ const Speakers = ({classes, speakers}) => {
               src={speaker.profilePicture}
               className={classes.avatar}
             />
-            {speaker.name}
+            <Typography variant="h6">{speaker.name}</Typography>
           </div>
           <Typography
             component="p"
@@ -119,15 +119,19 @@ const Speakers = ({classes, speakers}) => {
 
 const SessionDetail = ({classes, speakers, room, tags, session}) => (
   <div>
-    <div>Room: {room.name}</div>
-    <div>
-      Speaker{speakers.length === 1 ? '' : 's'}:{' '}
+    <Typography variant="subtitle2">
+      <span className="bold">Room: </span>
+      {room.name}
+    </Typography>
+    <Typography variant="subtitle2">
+      <span className="bold">Speaker{speakers.length === 1 ? '' : 's'}: </span>
       {speakers.map(s => s.name).join(', ')}
-    </div>
-    <div>Tags: {tags.map(c => c.name).join(', ')}</div>
-
+    </Typography>
+    <Typography variant="subtitle2">
+      <span className="bold">Tags: </span>
+      {tags.map(c => c.name).join(', ')}
+    </Typography>
     <Divider className={classes.divider} variant="middle" />
-
     <Typography
       component="p"
       variant="body2"
@@ -173,7 +177,7 @@ const ModeSelection = ({
 
 const Header = ({classes, session, isFavorite, handleFavoriteClick}) => (
   <div className={classes.header}>
-    <Typography variant="title">{session.title}</Typography>
+    <Typography variant="h6">{session.title}</Typography>
 
     <IconButton
       aria-label="Add to favorites"

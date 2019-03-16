@@ -7,6 +7,8 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Loading from './loading';
 import SessionCard from './sessionCard';
+import Typography from '@material-ui/core/Typography';
+
 import {
   sessionsForSelectedDaySelector,
   loadingScheduleSelector,
@@ -37,7 +39,10 @@ const groupSessions = sessions => {
 // render
 const SessionGroup = ({classes, group}) => (
   <div className={classes.group}>
-    <h2>{moment(group.time).format('dddd @ h:mm A')}</h2>
+    <Typography variant="h5" gutterBottom>
+      {moment(group.time).format('dddd @ h:mm A')}
+    </Typography>
+
     {group.sessions.map(session => (
       <SessionCard key={session.id} session={session} />
     ))}

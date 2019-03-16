@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {pipe, withHandlers} from '@synvox/rehook';
 
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,14 +11,14 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import InfoIcon from '@material-ui/icons/Info';
-
-import {withStyles} from '@material-ui/core/styles';
+import InvertColorsIcon from '@material-ui/icons/InvertColors';
 
 import {toggleConferenceModal} from '../../schedule/actions';
-import {toggleFavoritesFilter} from '../actions';
+import {toggleFavoritesFilter, toggleTheme} from '../actions';
 import {favoritesFilterSelector, isScheduleRouteSelector} from '../selectors';
 import {selectedConferenceSelector} from '../../schedule/selectors';
 
+// styles
 const styles = () => ({
   root: {
     width: '100%',
@@ -44,19 +46,12 @@ const styles = () => ({
   },
 });
 
-const handleFavoriteClick = toggleFavoritesFilter => () => {
-  toggleFavoritesFilter();
-};
-
-const handleToggleConferenceModal = toggleConferenceModal => () => {
-  toggleConferenceModal();
-};
-
-const FilterFavorites = ({favoritesFilter, toggleFavoritesFilter}) => (
+// render
+const FilterFavorites = ({favoritesFilter, handleFavoriteClick}) => (
   <IconButton
     aria-label="Filter List To Favorites"
     color={favoritesFilter ? 'secondary' : 'default'}
-    onClick={handleFavoriteClick(toggleFavoritesFilter)}
+    onClick={handleFavoriteClick}
   >
     <FavoriteIcon />
   </IconButton>
@@ -68,6 +63,15 @@ const Info = () => (
       <InfoIcon />
     </IconButton>
   </Link>
+);
+
+const ThemeToggle = ({handleToggleTheme}) => (
+  <IconButton
+    aria-label="Toggle Light / Dark Themes"
+    onClick={handleToggleTheme}
+  >
+    <InvertColorsIcon />
+  </IconButton>
 );
 
 const TitleScheduleLink = ({classes, selectedConference}) => (
@@ -83,9 +87,9 @@ const TitleScheduleLink = ({classes, selectedConference}) => (
 const TitleSelectConference = ({
   classes,
   selectedConference,
-  toggleConferenceModal,
+  handleToggleConferenceModal,
 }) => (
-  <Button onClick={handleToggleConferenceModal(toggleConferenceModal)}>
+  <Button onClick={handleToggleConferenceModal}>
     <Typography variant="h6" className={classes.title}>
       {selectedConference.title}
     </Typography>
@@ -102,6 +106,7 @@ const TitleBar = ({classes, isScheduleRoute, ...props}) => {
           <Title classes={classes} {...props} />
 
           <div>
+            <ThemeToggle {...props} />
             <Info />
             <FilterFavorites {...props} />
           </div>
@@ -111,6 +116,26 @@ const TitleBar = ({classes, isScheduleRoute, ...props}) => {
   );
 };
 
+// hooks
+const ComposedTitleBar = pipe(
+  withHandlers({
+    handleFavoriteClick: ({toggleFavoritesFilter}) => () => {
+      toggleFavoritesFilter();
+    },
+
+    handleToggleConferenceModal: ({toggleConferenceModal}) => () => {
+      toggleConferenceModal();
+    },
+
+    handleToggleTheme: ({toggleTheme}) => () => {
+      toggleTheme();
+    },
+  }),
+
+  TitleBar,
+);
+
+// redux
 const mapStateToProps = state => ({
   favoritesFilter: favoritesFilterSelector(state),
   selectedConference: selectedConferenceSelector(state),
@@ -119,5 +144,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {toggleFavoritesFilter, toggleConferenceModal},
-)(withStyles(styles)(TitleBar));
+  {toggleFavoritesFilter, toggleConferenceModal, toggleTheme},
+)(withStyles(styles)(ComposedTitleBar));
