@@ -13,6 +13,7 @@ import InfoIcon from '@material-ui/icons/Info';
 
 import {toggleFavorite, selectSession} from '../actions';
 import {
+  selectedConferenceSelector,
   speakersForSessionSelector,
   roomForSessionSelector,
   tagsForSessionSelector,
@@ -104,8 +105,8 @@ const ComposedSessionCard = pipe(
       selectSession(session);
     },
 
-    handleFavoriteClick: ({toggleFavorite, session}) => () => {
-      toggleFavorite(session.id);
+    handleFavoriteClick: ({toggleFavorite, conference, session}) => () => {
+      toggleFavorite(conference, session);
     },
   }),
 
@@ -114,6 +115,7 @@ const ComposedSessionCard = pipe(
 
 // redux
 const mapStateToProps = (state, props) => ({
+  conference: selectedConferenceSelector(state, props),
   speakers: speakersForSessionSelector(state, props),
   room: roomForSessionSelector(state, props),
   tags: tagsForSessionSelector(state, props),

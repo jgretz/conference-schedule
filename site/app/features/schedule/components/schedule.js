@@ -9,6 +9,7 @@ import SessionModal from './sessionModal';
 import ConferenceModal from './conferenceModal';
 
 import {execute} from '../actions';
+import {importOldFavorites} from '../../legacy/actions';
 import {selectedConferenceSelector} from '../selectors';
 
 // styles
@@ -34,9 +35,12 @@ const Schedule = ({classes}) => {
 const ComposedSchedule = pipe(
   lifecycle({
     componentDidMount() {
-      const {selectedConference, execute} = this.props;
+      const {selectedConference, execute, importOldFavorites} = this.props;
 
       execute(selectedConference.loadData);
+
+      // this will be in here until April 1st (or I get to the people who i know have favorites)
+      importOldFavorites();
     },
 
     componentDidUpdate(prevProps) {
@@ -56,5 +60,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {execute},
+  {execute, importOldFavorites},
 )(withStyles(styles)(ComposedSchedule));

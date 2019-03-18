@@ -252,8 +252,8 @@ const ComposedSessionModal = pipe(
       selectSessionModalModeDetail();
     },
 
-    handleFavoriteClick: ({session, toggleFavorite}) => () => {
-      toggleFavorite(session.id);
+    handleFavoriteClick: ({toggleFavorite, conference, session}) => () => {
+      toggleFavorite(conference, session);
     },
   }),
 

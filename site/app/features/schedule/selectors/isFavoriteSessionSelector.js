@@ -1,10 +1,20 @@
-import _ from 'lodash';
 import {createSelector} from 'reselect';
+
+import selectedConferenceSelector from './selectedConferenceSelector';
 import sessionForDetailSelector from './sessionForDetailSelector';
 import favoritesSelector from './favoritesSelector';
 
 export default createSelector(
+  selectedConferenceSelector,
   favoritesSelector,
   sessionForDetailSelector,
-  (favorites, session) => _.some(favorites, f => f === session.id),
+
+  (conference, favorites, session) => {
+    const confArray = favorites[conference.title];
+    if (!confArray) {
+      return false;
+    }
+
+    return confArray.includes(session.id);
+  },
 );

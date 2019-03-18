@@ -1,6 +1,9 @@
 import {TOGGLE_FAVORITE} from '../constants/actions';
 
-export const toggleFavorite = id => ({
+export const toggleFavorite = (conference, session) => ({
   type: TOGGLE_FAVORITE,
-  payload: id,
+  payload: {
+    conference,
+    session,
+  },
 });
