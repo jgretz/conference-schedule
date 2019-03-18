@@ -1,6 +1,7 @@
 import produce from 'immer';
 import {stateReducer} from 'truefit-react-utils';
 import {
+  CONFERENCE_SELECTED,
   LOADED_SCHEDULE_DATA,
   LOADED_SESSION_DETAIL,
 } from '../constants/actions';
@@ -11,6 +12,12 @@ const SESSIONS = 'SESSIONS';
 const INITIAL = getItemFromStorage(SESSIONS);
 
 export default stateReducer(INITIAL, {
+  [CONFERENCE_SELECTED]: state => {
+    setItemInStorage(SESSIONS, []);
+
+    return produce(state, () => []);
+  },
+
   [LOADED_SCHEDULE_DATA]: (state, {sessions}) => {
     setItemInStorage(SESSIONS, sessions);
 

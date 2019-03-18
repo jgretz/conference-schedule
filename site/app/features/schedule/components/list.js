@@ -68,6 +68,9 @@ const ListGrid = ({classes, sessions}) => {
 const List = ({classes, loadingState, ...props}) =>
   ({
     [DATA_STATE.LOADING_DATA_NONE_CACHED]: <Loading />,
+    [DATA_STATE.LOADING_DATA_OLD_CACHED]: (
+      <ListGrid classes={classes} {...props} />
+    ),
     [DATA_STATE.READY]: <ListGrid classes={classes} {...props} />,
   }[loadingState]);
 

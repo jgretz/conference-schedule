@@ -31,7 +31,7 @@ import {
   roomForSessionSelector,
   tagsForSessionSelector,
   isFavoriteSessionSelector,
-  loadingSelector,
+  loadingSessionDetailSelector,
 } from '../selectors';
 
 import {
@@ -39,7 +39,7 @@ import {
   SESSION_SPEAKERS_SELECTED,
 } from '../constants/actions';
 
-import {AVATAR} from '../constants/misc';
+import {AVATAR, DATA_STATE} from '../constants/misc';
 
 // styles
 const styles = () => ({
@@ -141,7 +141,7 @@ const SessionDetail = ({classes, speakers, room, tags, session}) => (
 );
 
 const Content = ({modals, loading, ...props}) => {
-  if (loading.sessionDetail) {
+  if (loading === DATA_STATE.LOADING_DATA_NONE_CACHED) {
     return <Loading />;
   }
 
@@ -262,7 +262,7 @@ const ComposedSessionModal = pipe(
 
 // redux
 const mapStateToProps = (state, props) => ({
-  loading: loadingSelector(state),
+  loading: loadingSessionDetailSelector(state),
 
   conference: selectedConferenceSelector(state),
   session: selectedSessionSelector(state),
