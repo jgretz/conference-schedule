@@ -9,9 +9,11 @@ import {render} from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 
 import Root from './Root';
-import {configureStore, configureHttp} from './util';
+import {configureStore, configureHttp, configureGA} from './util';
 
 // configure stuff
+configureGA();
+
 const history = createHistory();
 const store = configureStore(history);
 
