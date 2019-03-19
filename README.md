@@ -1,12 +1,13 @@
 # Conference Schedule
 
-This project is intended to be a quick, simple, vertical schedule for conferences. The short idea is to have a standard UI that can be made to point at the datasource of any conference.
+This project is intended to be a quick, simple, vertical schedule for conferences. The short idea is to have a
+standard UI that can be taught to point at the datasource of any conference.
 
-I currently have implemented the following conferences:
+The following conferences are implemented:
 
 - CodeMash (data from the CodeMash API)
-- CodeStock (data scrapped from their schedule page)
-- StirTrek (data scrapped from their schedule page)
+- CodeStock (data scraped from their schedule page)
+- StirTrek (data scraped from their schedule page)
 
 ## Live Site
 
