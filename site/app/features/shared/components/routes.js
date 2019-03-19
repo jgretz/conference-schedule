@@ -5,13 +5,15 @@ import {Schedule} from '../../schedule/components';
 import About from './about';
 import NotFound from './notFound';
 
+import withGATracker from './withGATracker';
+
 import {ROUTES} from '../constants';
 
 export default () => (
   <Switch>
-    <Route path={ROUTES.about.route} component={About} />
+    <Route path={ROUTES.about.route} component={withGATracker(About)} />
 
-    <Route path={ROUTES.schedule.route} component={Schedule} />
-    <Route component={NotFound} />
+    <Route path={ROUTES.schedule.route} component={withGATracker(Schedule)} />
+    <Route component={withGATracker(NotFound)} />
   </Switch>
 );
