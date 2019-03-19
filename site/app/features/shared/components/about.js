@@ -81,26 +81,29 @@ const About = ({classes}) => (
       , and I built this site.
     </Typography>
     <Typography variant="body1" gutterBottom className={classes.text}>
-      As part of my role, I am fortunate to be able to attend quite a few
+      As part of my role, I have the good fortune to attend quite a few
       conferences each year. In my experience, a key to having a fruitful
-      experience is to take the time to figure out what sessions pique your
-      interest beforehand. This approach allows you not only to plan a good mix,
-      but also enables you to quickly adjust on the fly as the conference
-      unfolds.
+      experience at a conference is to take the time to figure out what sessions
+      pique your interest beforehand. This approach allows you not only to plan
+      a good mix, but also enables you to quickly adjust on the fly as the
+      conference unfolds.
     </Typography>
     <Typography variant="body1" gutterBottom className={classes.text}>
       Every conference, though, publishes their schedule in a slightly different
-      way. Some provide apps or sites that save your favorites, while others
-      just put up a read only page - often in an unfortunate format that
-      requires both horizontal and vertical scrolling.
+      way. Some provide apps of varying quality; some build sites; while others
+      just put up a read only page. In any case, I find many of the provided
+      schedules don&apos;t quite work for me - and an increasing number
+      unfortunately requires both horizontal and vertical scrolling.
     </Typography>
     <Typography variant="body1" gutterBottom className={classes.text}>
-      To solve this problem, I created this site to standardize the schedules of
-      conferences I attend in a sane, simple, and easy to use format. If you are
-      an attendee of one of these conferences, I hope this site helps you as
-      well (and feel free to say hi if you see me walking around). If it does,
-      and you are feeling generous, I love coffee ... and you can buy me one
-      below :)
+      To address this problem, I created this site to standardize the
+      presentation of conference schedules in a sane, simple, and easy to use
+      format. Since this is a side project, the conferences supported are the
+      conferences I attend. If you are also an attendee of one of these
+      conferences, I hope this site helps you as well (and feel free to say hi
+      if you see me walking around - I&apos;ll likely be in shorts). If you do
+      enjoy using this site, and you are feeling generous, I love coffee ... and
+      here is a convenient link to buy me one:
     </Typography>
     <div className={classes.coffee}>
       <a
@@ -116,6 +119,18 @@ const About = ({classes}) => (
         <span className={classes.bmcText}>Buy me a coffee</span>
       </a>
     </div>
+
+    <Divider className={classes.divider} />
+
+    <Typography variant="body1" gutterBottom className={classes.text}>
+      Quick usability note: I store all of the session data, speaker data, and
+      your favorites in local storage. Because of this approach, there
+      isn&apos;t a way currently to share those across devices. I realize this
+      an annoyance, but I don&apos;t have a slick way right now to share it, and
+      I don&apos;t have the resources for this project to setup a database. If
+      you would like this limitation to be addressed, there are two paths: cash
+      (see the coffee link above) or code (see the github link below).
+    </Typography>
 
     <Divider className={classes.divider} />
 
