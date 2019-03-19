@@ -14,13 +14,11 @@ export default createSelector(
   favoritesSelector,
   favoritesFilterSelector,
   (conference, day, allSessions, favorites, favoritesFilter) => {
-    const sessions = (allSessions || []).filter(s => {
-      if (!moment(s.startTime).isSame(day, 'day')) {
-        return false;
-      }
-
-      return !favoritesFilter || favorites[conference.title].includes(s.id);
-    });
+    const sessions = (allSessions || [])
+      .filter(s => moment(s.startTime).isSame(day, 'day'))
+      .filter(
+        ({id}) => !favoritesFilter || favorites[conference.title]?.includes(id),
+      );
 
     return _.sortBy(sessions, s => moment(s.startTime));
   },

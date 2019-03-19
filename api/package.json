@@ -14,7 +14,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
-    "compression": "^1.7.3",
+    "compression": "^1.7.4",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "node-bits": "^0.0.34",
@@ -36,11 +36,11 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.13.0",
+    "eslint": "^5.15.3",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.12.4",
     "nodemon": "^1.18.10",
-    "pretty-format": "^24.3.0",
+    "pretty-format": "^24.5.0",
     "shelljs": "^0.8.3"
   }
 }
