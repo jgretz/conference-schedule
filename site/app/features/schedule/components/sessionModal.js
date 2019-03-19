@@ -241,7 +241,7 @@ const ComposedSessionModal = pipe(
     componentDidUpdate(prevProps) {
       const {execute, conference, session} = this.props;
 
-      if (!prevProps || prevProps.session?.id !== session?.id) {
+      if (session && (!prevProps || prevProps.session?.id !== session?.id)) {
         execute(conference.loadSessionDetail, session);
       }
     },

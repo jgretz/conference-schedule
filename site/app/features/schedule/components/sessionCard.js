@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import InfoIcon from '@material-ui/icons/Info';
+import Hidden from '@material-ui/core/Hidden';
+
+import {Tappable} from '../../shared/components';
 
 import {toggleFavorite, selectSession} from '../actions';
 import {
@@ -55,10 +58,12 @@ const Favorite = ({isFavorite, handleFavoriteClick}) => (
   </IconButton>
 );
 
-const Info = ({handleInfoClick}) => (
-  <IconButton aria-label="More Info" onClick={handleInfoClick}>
-    <InfoIcon />
-  </IconButton>
+const Info = ({handleSessionSelection}) => (
+  <Hidden smDown>
+    <IconButton aria-label="More Info" onClick={handleSessionSelection}>
+      <InfoIcon />
+    </IconButton>
+  </Hidden>
 );
 
 const Content = ({room, tags, classes}) => (
@@ -77,31 +82,39 @@ const SessionCard = ({
   session,
   speakers,
 
+  handleSessionSelection,
+
   ...props
 }) => (
-  <Card className={classes.card}>
-    <CardHeader
-      title={session.title}
-      subheader={
-        <Typography component="p">
-          {speakers.map(s => s.name).join(', ')}
-        </Typography>
-      }
-      action={
-        <div>
-          <Info session={session} {...props} />
-          <Favorite session={session} {...props} />
-        </div>
-      }
-    />
-    <Content classes={classes} session={session} {...props} />
-  </Card>
+  <Tappable onTap={handleSessionSelection}>
+    <Card className={classes.card}>
+      <CardHeader
+        title={session.title}
+        subheader={
+          <Typography component="p">
+            {speakers.map(s => s.name).join(', ')}
+          </Typography>
+        }
+        action={
+          <div>
+            <Info
+              session={session}
+              handleSessionSelection={handleSessionSelection}
+              {...props}
+            />
+            <Favorite session={session} {...props} />
+          </div>
+        }
+      />
+      <Content classes={classes} session={session} {...props} />
+    </Card>
+  </Tappable>
 );
 
 // hooks
 const ComposedSessionCard = pipe(
   withHandlers({
-    handleInfoClick: ({selectSession, session}) => () => {
+    handleSessionSelection: ({selectSession, session}) => () => {
       selectSession(session);
     },
 
