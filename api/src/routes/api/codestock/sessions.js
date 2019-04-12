@@ -1,8 +1,12 @@
 import _ from 'lodash';
 import axios from 'axios';
-import cheerio from 'cheerio';
 
-const SESSIONS_URL = 'http://codestock.org/2019-schedule/';
+const SESSIONS_URL = 'http://schedule.codestock.org/parse.js';
+
+// this file is a bit dirty because codestock changed their site at the last minute
+// (ahh the joys of scraping data instead of getting to use an api). because I didn't
+// want to lose my favorites but wanted to use my site, I had to update this in knoxville
+// the night before the conference.
 
 const createData = () => ({
   sessions: [],
@@ -27,99 +31,67 @@ const dedupData = data => {
 };
 
 // parsing logic
-const parseSessions = (data, $, date, roomId, sessionsDom) => {
-  sessionsDom.each((_, sessionDom) => {
-    const session = $(sessionDom);
+const parseSession = (summary, session) => {
+  const tags = _.flatten(
+    session.categories.map(category => category.categoryItems)
+  );
 
-    const times = session
-      .find('.sz-session__time')
-      .text()
-      .toUpperCase()
-      .split(' - ');
-    const startTime = times[0];
-    const endTime = times[1];
+  summary.sessions.push({
+    id: session.id,
+    roomId: session.roomId,
+    startTime: session.startsAt,
+    endTime: session.endsAt,
+    title: session.title,
+    description: session.description,
+    speakers: session.speakers.map(s => s.id),
+    tags: tags.map(t => t.id),
+  });
 
-    const id = session.attr('data-sessionid');
-    const title = session.find('.sz-session__title a').text();
+  session.speakers.forEach(speaker => {
+    summary.speakers.push(speaker);
+  });
 
-    const sessionSpeakers = [];
-    session.find('.sz-session__speakers li').each((_, s) => {
-      const speaker = $(s);
+  tags.forEach(tag => {
+    summary.tags.push(tag);
+  });
+};
 
-      const speakerId = speaker.attr('data-speakerid');
-      const speakerName = speaker.find('a').text();
+const parseTracks = (summary, day) => {
+  day.rooms.forEach(room => {
+    summary.rooms.push({id: room.id, name: room.name});
 
-      sessionSpeakers.push(speakerId);
-
-      data.speakers.push({
-        id: speakerId,
-        name: speakerName,
-      });
-    });
-
-    const sessionTags = [];
-    session.find('.sz-session__tags li').each((_, t) => {
-      const tag = $(t);
-
-      const tagId = tag.attr('data-tagid');
-      const tagText = t.children.map(x => x.data).join(' ');
-
-      sessionTags.push(tagId);
-      data.tags.push({
-        id: tagId,
-        name: tagText,
-      });
-    });
-
-    data.sessions.push({
-      id,
-      roomId,
-      startTime: `${date} ${startTime} EDT`,
-      endTime: `${date} ${endTime} EDT`,
-      title,
-      speakers: sessionSpeakers,
-      tags: sessionTags,
+    room.sessions.forEach(session => {
+      parseSession(summary, session);
     });
   });
 };
 
-const parseTracks = (data, $) => day => {
-  const date = $(day)
-    .find('.sz-day__title')
-    .text()
-    .split(', ')[1];
+const parseData = data => {
+  const summary = createData();
 
-  const tracks = $(day).find('.sz-track');
-
-  tracks.each((_, t) => {
-    const track = $(t);
-    const roomId = track.attr('data-roomid');
-    const room = track.find('h2').text();
-
-    data.rooms.push({id: roomId, name: room});
-
-    parseSessions(data, $, date, roomId, track.find('.sz-session'));
-  });
-};
-
-const parseData = $ => {
-  const allData = createData();
-  const parse = parseTracks(allData, $);
-  $('.sz-grid').each((_, day) => {
-    parse(day);
+  data.forEach(day => {
+    parseTracks(summary, day);
   });
 
-  const cleanData = dedupData(allData);
+  const cleanData = dedupData(summary);
 
   return cleanData;
+};
+
+const parseArray = rawJS => {
+  const start = rawJS.indexOf('[', 0);
+  const end = rawJS.indexOf('];', start);
+  const jsonArray = rawJS.substring(start, end + 1);
+
+  return JSON.parse(jsonArray);
 };
 
 // http route
 export default async (_, res) => {
   try {
-    const html = await axios.get(SESSIONS_URL);
-    const $ = cheerio.load(html.data);
-    const data = parseData($);
+    const rawJS = await axios.get(SESSIONS_URL);
+    const rawData = parseArray(rawJS.data);
+    const data = parseData(rawData);
 
     res.json(data);
   } catch (err) {

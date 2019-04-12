@@ -3,3 +3,4 @@ export {default as NotFound} from './notFound';
 export {default as Routes} from './routes';
 export {default as Tappable} from './tappable';
 export {default as TitleBar} from './titleBar';
+export {default as WithGATracker} from './withGATracker';

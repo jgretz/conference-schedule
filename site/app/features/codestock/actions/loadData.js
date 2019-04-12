@@ -7,7 +7,7 @@ import {
   FAILED_LOADING_SCHEDULE_DATA,
 } from '../../schedule/constants/actions';
 
-const DATE_FORMAT = 'MM-DD-YYYY HH:mm a SSS';
+const DATE_FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
 const mapToSharedModel = data => {
   const sessions = data.sessions.map(x => ({
