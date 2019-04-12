@@ -1,14 +1,15 @@
 language: node_js
 node_js:
-- node
+  - node
 after_success:
-- yarn build
+  - yarn build
 before_deploy:
-- cd ./lib
+  - cd ./lib
 deploy:
   provider: heroku
   api_key:
     secure: cpNQGTZ4PNZaR7EP+h9VmjTXDDivF1cDsoBud/v27m8hD1YCurCCyC2WKF8RlDD/8s3kD2yisnR5bPrwv6ZFR62rP7Rx6af0TfFiILBuU6nAqTft8OU2EeH0WvyUY+JR74HHX1bKD6xk1PBe7RccAJ0ITX38edVZ5jCE5CW273GlWABX/snCLziQq90NBTqqJs6X2FIBpCqjaYxbDQTHuG8rjB1rbxhcwl6et3QKdesCBRvkAofnmCJmHz3hypQrFR6dEWtKIrSphuverUOj9d5ZTxaWcRGKj1XWCskMgbUPMm8lp2NlmBNpy/tjU6VghJQDg2LywvBOJ3Qc4jSt6oqxKDoBTv98JralGEqOhKhkxvARHQfdczyNffDDmPzKx0e/u4DDynczocG0yrGraDhALeVJSLMVXpmev72csThRQDgqVaFtuAnwcyJnVVxeyYbtXmUk6ujqbIuP4T6fG4IP2ETP+08VuNwGFthu6z/gRQd8kC5lC+9nZmeYyx27zK6XeA3P/OibA3L93DHBsvxCOwkdfzwaZU8cPFHS9GaxJcwQ+LnJ2m+pt75054QE6gGj2GlX74voeH1OPvgTGyKy4fetXgHo9JRhUexWeQtHBB3MJNDwo3qlenCJEikB7BfPRAH/xPh8epEjswnRhY/lZzIygl/mT8PDTkcCMTk=
   app: altconfschedule
+  skip_cleanup: true
   on:
     repo: jgretz/conference-schedule
