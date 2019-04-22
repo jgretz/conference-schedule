@@ -32,8 +32,8 @@ const times = (cell, session) => {
   const time = cell.text();
   const startTime = moment(`${DATE} ${time}`, FORMAT);
 
-  session.startTime = startTime.toISOString(true);
-  session.endTime = startTime.add(1, 'h').toISOString(true);
+  session.startTime = startTime.toString();
+  session.endTime = startTime.add(1, 'h').toString();
 };
 
 const title = (cell, session) => {
