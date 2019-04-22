@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import axios from 'axios';
 import cheerio from 'cheerio';
 
@@ -26,14 +26,16 @@ const findOrCreate = (name, array) => {
 };
 
 // parse sessions
-const FORMAT = 'MM-DD-YY H:mm a EST';
+const FORMAT = 'MM-DD-YY H:mm a';
+const TIMEZONE = 'America/New_York';
 const DATE = '04-26-19';
+
 const times = (cell, session) => {
   const time = cell.text();
-  const startTime = moment(`${DATE} ${time}`, FORMAT);
+  const startTime = moment.tz(`${DATE} ${time}`, FORMAT, TIMEZONE);
 
-  session.startTime = startTime.toString();
-  session.endTime = startTime.add(1, 'h').toString();
+  session.startTime = startTime.toISOString();
+  session.endTime = startTime.add(1, 'h').toISOString();
 };
 
 const title = (cell, session) => {
