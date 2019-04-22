@@ -26,7 +26,7 @@ const findOrCreate = (name, array) => {
 };
 
 // parse sessions
-const FORMAT = 'MM-DD-YY H:mm a';
+const FORMAT = 'MM-DD-YY H:mm a EST';
 const DATE = '04-26-19';
 const times = (cell, session) => {
   const time = cell.text();
