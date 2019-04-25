@@ -86,29 +86,38 @@ const SessionCard = ({
 
   ...props
 }) => (
-  <Tappable onTap={handleSessionSelection}>
-    <Card className={classes.card}>
-      <CardHeader
-        title={session.title}
-        subheader={
+  <Card className={classes.card}>
+    <CardHeader
+      title={
+        <Tappable onTap={handleSessionSelection}>
+          <Typography variant="h5">{session.title}</Typography>
+        </Tappable>
+      }
+      subheader={
+        <Tappable onTap={handleSessionSelection}>
           <Typography component="p">
             {speakers.map(s => s.name).join(', ')}
           </Typography>
-        }
-        action={
-          <div>
+        </Tappable>
+      }
+      action={
+        <div>
+          <Tappable onTap={handleSessionSelection}>
             <Info
               session={session}
               handleSessionSelection={handleSessionSelection}
               {...props}
             />
-            <Favorite session={session} {...props} />
-          </div>
-        }
-      />
+          </Tappable>
+          <Favorite session={session} {...props} />
+        </div>
+      }
+    />
+
+    <Tappable onTap={handleSessionSelection}>
       <Content classes={classes} session={session} {...props} />
-    </Card>
-  </Tappable>
+    </Tappable>
+  </Card>
 );
 
 // hooks
