@@ -1,7 +1,6 @@
 import React from 'react';
-import {compose} from '@truefit/bach';
+import {compose, withEffect} from '@truefit/bach';
 import {withActions, withSelector} from '@truefit/bach-redux';
-import {withLifecycle} from '@truefit/bach-recompose';
 import {withStyles} from '@truefit/bach-material-ui';
 import {withGATracker} from '../../shared/enhancers';
 
@@ -10,7 +9,7 @@ import DaySelection from './daySelection';
 import SessionModal from './sessionModal';
 import ConferenceModal from './conferenceModal';
 
-import {execute} from '../actions';
+import {loadSchedule} from '../actions';
 import {selectedConferenceSelector} from '../selectors';
 
 const Schedule = ({classes}) => {
@@ -26,20 +25,15 @@ const Schedule = ({classes}) => {
 };
 
 export default compose(
-  withActions({execute}),
+  withActions({loadSchedule}),
   withSelector('selectedConference', selectedConferenceSelector),
 
-  withLifecycle({
-    componentDidMount: ({selectedConference, execute}) => {
-      execute(selectedConference.loadData);
+  withEffect(
+    ({loadSchedule, selectedConference}) => {
+      loadSchedule(selectedConference);
     },
-
-    componentDidUpdate: ({selectedConference, execute}, prevProps) => {
-      if (selectedConference !== prevProps?.selectedConference) {
-        execute(selectedConference.loadData);
-      }
-    },
-  }),
+    ['selectedConference'],
+  ),
 
   withStyles({
     schedule: {

@@ -10,9 +10,15 @@ import {render} from 'react-dom';
 import {createBrowserHistory} from 'history';
 
 import Root from './Root';
-import {configureStore, configureHttp, configureGA} from './util';
+import {
+  configureConferences,
+  configureStore,
+  configureHttp,
+  configureGA,
+} from './util';
 
 // configure stuff
+configureConferences();
 configureGA();
 
 const history = createBrowserHistory();

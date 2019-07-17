@@ -17,7 +17,7 @@ export default stateReducer(INITIAL, {
     return produce(state, () => speakers);
   },
 
-  [LOADED_SESSION_DETAIL]: (state, {speakers}) => {
+  [LOADED_SESSION_DETAIL]: (state, {speakers = []}) => {
     const update = produce(state, draft => {
       speakers.forEach(speaker => {
         const draftSpeaker = draft[draft.findIndex(d => d.id === speaker.id)];

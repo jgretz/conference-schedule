@@ -12,7 +12,7 @@ import ConferenceButton from './conferenceButton';
 
 import {toggleConferenceModal} from '../actions';
 import {modalsSelector} from '../selectors';
-import {CONFERENCES} from '../constants/conferences';
+import {CONFERENCES} from '../../../util/configureConferences';
 
 // render
 const Cancel = ({handleClose}) => (

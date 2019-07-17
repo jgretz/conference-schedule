@@ -2,6 +2,7 @@ export {default as ConferenceButton} from './conferenceButton';
 export {default as ConferenceModal} from './conferenceModal';
 export {default as DayButton} from './dayButton';
 export {default as DaySelection} from './daySelection';
+export {default as Empty} from './empty';
 export {default as Loading} from './loading';
 export {default as Schedule} from './schedule';
 export {default as SessionCard} from './sessionCard';

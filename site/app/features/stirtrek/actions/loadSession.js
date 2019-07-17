@@ -8,7 +8,7 @@ import {
 
 import {SESSION_URL} from '../constants';
 
-export const loadSessionDetail = async (dispatch, store, [session]) => {
+export const loadSession = session => async dispatch => {
   dispatch({type: LOADING_SESSION_DETAIL});
 
   try {

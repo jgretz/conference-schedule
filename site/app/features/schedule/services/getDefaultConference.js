@@ -4,7 +4,7 @@ import moment from 'moment';
 import {getItemFromStorage} from '../../shared/services';
 
 import {CONFERENCE} from '../constants/actions';
-import {CONFERENCES} from '../constants/conferences';
+import {CONFERENCES} from '../../../util/configureConferences';
 
 const nearestConference = () => {
   const sorted = _.sortBy(CONFERENCES, c => moment(_.nth(c.days, 0)).unix());

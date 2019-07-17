@@ -1,9 +1,9 @@
-import promiseMiddlware from 'redux-promise-middleware';
 import thunkMiddleware from 'redux-thunk';
 import asyncAwaitMiddleware from 'redux-async-await';
 import {applyMiddleware, createStore} from 'redux';
 import {connectRouter, routerMiddleware} from 'connected-react-router';
 import createRootReducer from '../rootReducer';
+import {scheduleMiddleware} from '../features/schedule/middleware';
 
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -35,8 +35,8 @@ const createDevStore = (history, middleware) => {
 
 export default history => {
   const middleware = [
+    scheduleMiddleware,
     thunkMiddleware,
-    promiseMiddlware,
     asyncAwaitMiddleware,
     routerMiddleware(history),
   ];

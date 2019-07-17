@@ -1,8 +1,8 @@
 import React from 'react';
-import {compose, withCallback} from '@truefit/bach';
+import {compose, withCallback, withEffect} from '@truefit/bach';
 import {withActions, withSelector} from '@truefit/bach-redux';
 import {withStyles} from '@truefit/bach-material-ui';
-import {withLifecycle, renderIf} from '@truefit/bach-recompose';
+import {renderIf} from '@truefit/bach-recompose';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -12,7 +12,7 @@ import Header from './sessionModalHeader';
 import Content from './sessionModalContent';
 import Empty from './empty';
 
-import {execute, selectSession} from '../actions';
+import {selectSession, loadSession} from '../actions';
 
 import {
   modalsSelector,
@@ -44,19 +44,18 @@ export default compose(
   withSelector('conference', selectedConferenceSelector),
   withSelector('session', selectedSessionSelector),
 
-  withActions({execute, selectSession}),
+  withActions({loadSession, selectSession}),
 
   withCallback('handleClose', ({selectSession}) => () => {
     selectSession(null);
   }),
 
-  withLifecycle({
-    componentDidUpdate: ({execute, conference, session}, prevProps) => {
-      if (session && (!prevProps || prevProps.session?.id !== session?.id)) {
-        execute(conference.loadSessionDetail, session);
-      }
+  withEffect(
+    ({session, loadSession}) => {
+      loadSession(session);
     },
-  }),
+    ['session'],
+  ),
 
   withStyles({
     dialogTitle: {

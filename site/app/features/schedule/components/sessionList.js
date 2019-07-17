@@ -32,15 +32,15 @@ const List = ({classes, sessionGroups}) => (
 );
 
 export default compose(
-  renderIf(
-    ({loadingState}) => loadingState === DATA_STATE.LOADING_DATA_NONE_CACHED,
-    Loading,
-  ),
-
   withSelector('sessions', sessionsForSelectedDaySelector),
   withSelector('loadingState', loadingScheduleSelector),
 
   withMemo('sessionGroups', ({sessions}) => groupSessionsBySlot(sessions)),
+
+  renderIf(
+    ({loadingState}) => loadingState === DATA_STATE.LOADING_DATA_NONE_CACHED,
+    Loading,
+  ),
 
   withStyles({
     root: {
