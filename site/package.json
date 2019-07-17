@@ -14,10 +14,9 @@
     "generateReducerIndexFiles": "babel-node tools/generateReducerIndexFiles.js",
     "generateRootReducer": "babel-node tools/generateRootReducer.js",
     "generateFiles": "run-p generateIndexFiles generateRootReducer",
-    "webpack": "webpack-cli --config webpack.config.prod.babel.js --bail",
-    "clean": "rimraf /lib",
-    "build": "yarn run generateFiles && yarn run webpack",
-    "precommit": "lint-staged"
+    "webpack": "webpack --config webpack.config.prod.babel.js --bail",
+    "clean": "rimraf ./lib",
+    "build": "yarn run generateFiles && yarn run webpack"
   },
   "lint-staged": {
     "*.js": [
@@ -119,5 +118,10 @@
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-stylish": "^0.1.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
