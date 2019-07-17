@@ -1,3 +1,7 @@
 import React from 'react';
+import {compose} from '@truefit/bach';
+import {withGATracker} from '../enhancers';
 
-export default () => <div>Sorry I wasnt able to find the page</div>;
+const NotFound = () => <div>Sorry I wasnt able to find the page</div>;
+
+export default compose(withGATracker())(NotFound);

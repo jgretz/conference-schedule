@@ -1,81 +1,20 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {pipe, withHandlers} from '@synvox/rehook';
+import {compose, withCallback} from '@truefit/bach';
+import {withActions, withSelector} from '@truefit/bach-redux';
+import {withStyles} from '@truefit/bach-material-ui';
 
-import {withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import InfoIcon from '@material-ui/icons/Info';
-import Hidden from '@material-ui/core/Hidden';
 
+import Favorite from './sessionCardFavorite';
+import Info from './sessionCardInfo';
+import Content from './sessionCardContent';
 import {Tappable} from '../../shared/components';
 
-import {toggleFavorite, selectSession} from '../actions';
-import {
-  selectedConferenceSelector,
-  speakersForSessionSelector,
-  roomForSessionSelector,
-  tagsForSessionSelector,
-  isFavoriteSessionSelector,
-} from '../selectors';
+import {selectSession} from '../actions';
 
-// styles
-const styles = () => ({
-  card: {
-    marginBottom: 20,
-  },
-  actions: {
-    display: 'flex',
-  },
-  contentFooter: {
-    marginTop: 10,
-    paddingTop: 10,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  room: {
-    minWidth: 100,
-  },
-  speakerButton: {
-    margin: 0,
-    padding: 0,
-  },
-});
-
-// render
-const Favorite = ({isFavorite, handleFavoriteClick}) => (
-  <IconButton
-    aria-label="Add to favorites"
-    color={isFavorite ? 'secondary' : 'default'}
-    onClick={handleFavoriteClick}
-  >
-    <FavoriteIcon />
-  </IconButton>
-);
-
-const Info = ({handleSessionSelection}) => (
-  <Hidden smDown>
-    <IconButton aria-label="More Info" onClick={handleSessionSelection}>
-      <InfoIcon />
-    </IconButton>
-  </Hidden>
-);
-
-const Content = ({room, tags, classes}) => (
-  <CardContent>
-    <div className={classes.contentFooter}>
-      <Typography component="p" className={classes.room}>
-        {room.name}
-      </Typography>
-      <Typography component="p">{tags.map(c => c.name).join(', ')}</Typography>
-    </div>
-  </CardContent>
-);
+import {speakersForSessionSelector} from '../selectors';
 
 const SessionCard = ({
   classes,
@@ -83,8 +22,6 @@ const SessionCard = ({
   speakers,
 
   handleSessionSelection,
-
-  ...props
 }) => (
   <Card className={classes.card}>
     <CardHeader
@@ -102,49 +39,36 @@ const SessionCard = ({
       }
       action={
         <div>
-          <Tappable onTap={handleSessionSelection}>
-            <Info
-              session={session}
-              handleSessionSelection={handleSessionSelection}
-              {...props}
-            />
-          </Tappable>
-          <Favorite session={session} {...props} />
+          <Info session={session} />
+          <Favorite session={session} />
         </div>
       }
     />
 
     <Tappable onTap={handleSessionSelection}>
-      <Content classes={classes} session={session} {...props} />
+      <Content session={session} />
     </Tappable>
   </Card>
 );
 
-// hooks
-const ComposedSessionCard = pipe(
-  withHandlers({
-    handleSessionSelection: ({selectSession, session}) => () => {
-      selectSession(session);
-    },
+export default compose(
+  withSelector('speakers', speakersForSessionSelector),
 
-    handleFavoriteClick: ({toggleFavorite, conference, session}) => () => {
-      toggleFavorite(conference, session);
-    },
+  withActions({selectSession}),
+  withCallback('handleSessionSelection', ({selectSession, session}) => () => {
+    selectSession(session);
   }),
 
-  SessionCard,
-);
-
-// redux
-const mapStateToProps = (state, props) => ({
-  conference: selectedConferenceSelector(state, props),
-  speakers: speakersForSessionSelector(state, props),
-  room: roomForSessionSelector(state, props),
-  tags: tagsForSessionSelector(state, props),
-  isFavorite: isFavoriteSessionSelector(state, props),
-});
-
-export default connect(
-  mapStateToProps,
-  {toggleFavorite, selectSession},
-)(withStyles(styles)(ComposedSessionCard));
+  withStyles({
+    card: {
+      marginBottom: 20,
+    },
+    actions: {
+      display: 'flex',
+    },
+    speakerButton: {
+      margin: 0,
+      padding: 0,
+    },
+  }),
+)(SessionCard);

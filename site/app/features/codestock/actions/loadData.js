@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {get} from 'truefit-react-utils';
+import {get} from '@truefit/http-utils';
 import {SESSIONS_URL} from '../constants';
 import {
   LOADING_SCHEDULE_DATA,

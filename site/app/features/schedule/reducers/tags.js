@@ -1,4 +1,4 @@
-import {stateReducer} from 'truefit-react-utils';
+import {stateReducer} from '@truefit/redux-utils';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 import {LOADED_SCHEDULE_DATA} from '../constants/actions';
 

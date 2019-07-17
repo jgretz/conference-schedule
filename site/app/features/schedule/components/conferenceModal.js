@@ -1,39 +1,18 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {pipe, withHandlers} from '@synvox/rehook';
+import {compose, withCallback} from '@truefit/bach';
+import {withActions, withSelector} from '@truefit/bach-redux';
+import {withStyles} from '@truefit/bach-material-ui';
 
-import {withStyles} from '@material-ui/core/styles';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
+import ConferenceButton from './conferenceButton';
 
-import {toggleConferenceModal, selectConference} from '../actions';
+import {toggleConferenceModal} from '../actions';
 import {modalsSelector} from '../selectors';
 import {CONFERENCES} from '../constants/conferences';
-
-// Conference Component
-const Conference = ({conference, handleSelectConference}) => (
-  <ListItem button onClick={handleSelectConference}>
-    <ListItemText primary={conference.title} />
-  </ListItem>
-);
-
-const ComposedConference = pipe(
-  withHandlers({
-    handleSelectConference: ({
-      conference,
-      toggleConferenceModal,
-      selectConference,
-    }) => () => {
-      selectConference(conference);
-      toggleConferenceModal();
-    },
-  }),
-
-  Conference,
-);
 
 // render
 const Cancel = ({handleClose}) => (
@@ -45,7 +24,7 @@ const Cancel = ({handleClose}) => (
 const ConferenceList = props => (
   <List>
     {CONFERENCES.map(conf => (
-      <ComposedConference key={conf.title} conference={conf} {...props} />
+      <ConferenceButton key={conf.title} conference={conf} />
     ))}
     <Cancel key="Cancel" {...props} />
   </List>
@@ -64,28 +43,13 @@ const ConferenceModal = ({modals, handleClose, ...props}) => (
   </Dialog>
 );
 
-// hooks
-const ComposedConferenceModal = pipe(
-  withHandlers({
-    handleClose: ({toggleConferenceModal}) => () => {
-      toggleConferenceModal();
-    },
+export default compose(
+  withActions({toggleConferenceModal}),
+  withSelector('modals', modalsSelector),
+
+  withCallback('handleClose', ({toggleConferenceModal}) => () => {
+    toggleConferenceModal();
   }),
 
-  ConferenceModal,
-);
-
-// redux
-const mapStateToProps = state => ({
-  modals: modalsSelector(state),
-});
-
-const mapDispatchToProps = {
-  toggleConferenceModal,
-  selectConference,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withStyles({})(ComposedConferenceModal));
+  withStyles(),
+)(ConferenceModal);

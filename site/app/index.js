@@ -1,12 +1,13 @@
-import '@babel/polyfill';
 import './babelHelpers';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 import 'typeface-roboto';
 import './styles/styles.scss';
 
 import React from 'react';
 import {render} from 'react-dom';
-import createHistory from 'history/createBrowserHistory';
+import {createBrowserHistory} from 'history';
 
 import Root from './Root';
 import {configureStore, configureHttp, configureGA} from './util';
@@ -14,7 +15,7 @@ import {configureStore, configureHttp, configureGA} from './util';
 // configure stuff
 configureGA();
 
-const history = createHistory();
+const history = createBrowserHistory();
 const store = configureStore(history);
 
 configureHttp(store);

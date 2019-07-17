@@ -1,5 +1,5 @@
 import produce from 'immer';
-import {stateReducer} from 'truefit-react-utils';
+import {stateReducer} from '@truefit/redux-utils';
 import {TOGGLE_FAVORITES_FILTER, TOGGLE_THEME} from '../actions';
 import {getItemFromStorage, setItemInStorage} from '../services';
 import {THEMES} from '../constants';

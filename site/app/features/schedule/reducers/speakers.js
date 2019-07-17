@@ -1,5 +1,5 @@
 import produce from 'immer';
-import {stateReducer} from 'truefit-react-utils';
+import {stateReducer} from '@truefit/redux-utils';
 import {
   LOADED_SCHEDULE_DATA,
   LOADED_SESSION_DETAIL,

@@ -29,13 +29,14 @@ export default {
         use: {
           loader: 'babel-loader',
           options: {
+            cacheDirectory: true,
             presets: [
               [
                 '@babel/preset-env',
                 {
                   useBuiltIns: 'entry',
+                  corejs: 3,
                   modules: false,
-                  forceAllTransforms: false,
                 },
               ],
               '@babel/preset-react',

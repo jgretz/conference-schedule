@@ -33,7 +33,7 @@ const createDevStore = (history, middleware) => {
   return store;
 };
 
-export const configureStore = history => {
+export default history => {
   const middleware = [
     thunkMiddleware,
     promiseMiddlware,

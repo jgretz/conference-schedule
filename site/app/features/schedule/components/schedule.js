@@ -1,9 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {pipe, lifecycle} from '@synvox/rehook';
+import {compose} from '@truefit/bach';
+import {withActions, withSelector} from '@truefit/bach-redux';
+import {withLifecycle} from '@truefit/bach-recompose';
+import {withStyles} from '@truefit/bach-material-ui';
+import {withGATracker} from '../../shared/enhancers';
 
-import {withStyles} from '@material-ui/core/styles';
-import List from './list';
+import SessionList from './sessionList';
 import DaySelection from './daySelection';
 import SessionModal from './sessionModal';
 import ConferenceModal from './conferenceModal';
@@ -11,19 +13,11 @@ import ConferenceModal from './conferenceModal';
 import {execute} from '../actions';
 import {selectedConferenceSelector} from '../selectors';
 
-// styles
-const styles = {
-  schedule: {
-    margin: '20px 20px 0 20px',
-  },
-};
-
-// render
 const Schedule = ({classes}) => {
   return (
     <div className={classes.schedule}>
       <DaySelection />
-      <List />
+      <SessionList />
 
       <SessionModal />
       <ConferenceModal />
@@ -31,30 +25,27 @@ const Schedule = ({classes}) => {
   );
 };
 
-const ComposedSchedule = pipe(
-  lifecycle({
-    componentDidMount() {
-      const {selectedConference, execute} = this.props;
+export default compose(
+  withActions({execute}),
+  withSelector('selectedConference', selectedConferenceSelector),
 
+  withLifecycle({
+    componentDidMount: ({selectedConference, execute}) => {
       execute(selectedConference.loadData);
     },
 
-    componentDidUpdate(prevProps) {
-      const {selectedConference, execute} = this.props;
-      if (prevProps && prevProps.selectedConference !== selectedConference) {
+    componentDidUpdate: ({selectedConference, execute}, prevProps) => {
+      if (selectedConference !== prevProps?.selectedConference) {
         execute(selectedConference.loadData);
       }
     },
   }),
 
-  Schedule,
-);
+  withStyles({
+    schedule: {
+      margin: '20px 20px 0 20px',
+    },
+  }),
 
-const mapStateToProps = state => ({
-  selectedConference: selectedConferenceSelector(state),
-});
-
-export default connect(
-  mapStateToProps,
-  {execute},
-)(withStyles(styles)(ComposedSchedule));
+  withGATracker(),
+)(Schedule);

@@ -1,68 +1,11 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import {compose} from '@truefit/bach';
+import {withStyles} from '@truefit/bach-material-ui';
+import {withGATracker} from '../enhancers';
+
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
-
-const styles = {
-  root: {
-    width: '96%',
-    maxWidth: 800,
-    margin: '20px auto 0 auto',
-  },
-
-  text: {
-    marginBottom: 24,
-  },
-
-  divider: {
-    marginBottom: 24,
-    marginTop: 24,
-  },
-
-  coffee: {
-    marginTop: 24,
-    display: 'flex',
-    justifyContent: 'center',
-  },
-
-  bmcButton: {
-    lineHeight: '36px !important',
-    height: '37px !important',
-    textDecoration: 'none !important',
-    display: 'inline-flex !important',
-    color: '#ffffff !important',
-    backgroundColor: '#ff813f !important',
-    borderRadius: '3px !important',
-    border: '1px solid transparent !important',
-    padding: '0px 9px !important',
-    fontSize: '17px !important',
-    letterSpacing: '-0.08px !important',
-    boxShadow: '0px 1px 2px rgba(190, 190, 190, 0.5) !important',
-    WebkitBoxShadow: '0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important',
-    fontFamily: "'Lato', sans-serif !important",
-    WebkitBoxSizing: 'border-box !important',
-    boxSizing: 'border-box !important',
-    OTransition: '0.3s all linear !important',
-    WebkitTransition: '0.3s all linear !important',
-    MozTransition: '0.3s all linear !important',
-    MsTransition: '0.3s all linear !important',
-    transition: '0.3s all linear !important',
-    userSelect: 'none',
-  },
-
-  bmcImage: {
-    width: '27px !important',
-    marginBottom: '1px !important',
-    boxShadow: 'none !important',
-    border: 'none !important',
-    verticalAlign: 'middle !important',
-  },
-
-  bmcText: {
-    marginLeft: 5,
-  },
-};
 
 const About = ({classes}) => (
   <div className={classes.root}>
@@ -74,14 +17,14 @@ const About = ({classes}) => (
       <Link href="https://twitter.com/joshgretz" target="_blank">
         @joshgretz
       </Link>
-      ), I&apos;m the CTO at{' '}
-      <Link href="https://www.truefit.io" target="_blank">
-        Truefit
-      </Link>
-      , and I built this site.
+      ) and I built this site.
     </Typography>
     <Typography variant="body1" gutterBottom className={classes.text}>
-      As part of my role, I have the good fortune to attend quite a few
+      By day I&apos;m the CTO at{' '}
+      <Link href="https://www.truefit.io" target="_blank">
+        Truefit
+      </Link>{' '}
+      and as part of my role, I have the good fortune to attend quite a few
       conferences each year. In my experience, a key to having a fruitful
       experience at a conference is to take the time to figure out what sessions
       pique your interest beforehand. This approach allows you not only to plan
@@ -148,4 +91,66 @@ const About = ({classes}) => (
   </div>
 );
 
-export default withStyles(styles)(About);
+export default compose(
+  withStyles({
+    root: {
+      width: '96%',
+      maxWidth: 800,
+      margin: '20px auto 0 auto',
+    },
+
+    text: {
+      marginBottom: 24,
+    },
+
+    divider: {
+      marginBottom: 24,
+      marginTop: 24,
+    },
+
+    coffee: {
+      marginTop: 24,
+      display: 'flex',
+      justifyContent: 'center',
+    },
+
+    bmcButton: {
+      lineHeight: '36px !important',
+      height: '37px !important',
+      textDecoration: 'none !important',
+      display: 'inline-flex !important',
+      color: '#ffffff !important',
+      backgroundColor: '#ff813f !important',
+      borderRadius: '3px !important',
+      border: '1px solid transparent !important',
+      padding: '0px 9px !important',
+      fontSize: '17px !important',
+      letterSpacing: '-0.08px !important',
+      boxShadow: '0px 1px 2px rgba(190, 190, 190, 0.5) !important',
+      WebkitBoxShadow: '0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important',
+      fontFamily: "'Lato', sans-serif !important",
+      WebkitBoxSizing: 'border-box !important',
+      boxSizing: 'border-box !important',
+      OTransition: '0.3s all linear !important',
+      WebkitTransition: '0.3s all linear !important',
+      MozTransition: '0.3s all linear !important',
+      MsTransition: '0.3s all linear !important',
+      transition: '0.3s all linear !important',
+      userSelect: 'none',
+    },
+
+    bmcImage: {
+      width: '27px !important',
+      marginBottom: '1px !important',
+      boxShadow: 'none !important',
+      border: 'none !important',
+      verticalAlign: 'middle !important',
+    },
+
+    bmcText: {
+      marginLeft: 5,
+    },
+  }),
+
+  withGATracker(),
+)(About);

@@ -1,58 +1,27 @@
 import React from 'react';
-import moment from 'moment';
-import {connect} from 'react-redux';
-import Button from '@material-ui/core/Button';
-import {pipe, withHandlers} from '@synvox/rehook';
+import {compose} from '@truefit/bach';
+import {withSelector} from '@truefit/bach-redux';
+import {withStyles} from '@truefit/bach-material-ui';
 
-import {withStyles} from '@material-ui/core/styles';
-import {selectDay} from '../actions';
-import {selectedConferenceSelector, selectedDaySelector} from '../selectors';
+import DayButton from './dayButton';
 
-// styles
-const styles = {
-  daySelect: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-};
+import {selectedConferenceSelector} from '../selectors';
 
-// Day Component
-const colorForDay = (day, selectedDay) =>
-  day.isSame(selectedDay, 'day') ? 'primary' : 'default';
-
-const Day = ({day, selectedDay, handleDayClick}) => (
-  <Button color={colorForDay(day, selectedDay)} onClick={handleDayClick}>
-    {moment(day).format('dddd')}
-  </Button>
-);
-
-const ComposedDay = pipe(
-  withHandlers({
-    handleDayClick: ({day, selectDay}) => () => {
-      selectDay(day);
-    },
-  }),
-
-  Day,
-);
-
-// Days List
-const Days = ({classes, selectedConference, ...props}) => (
+const Days = ({classes, selectedConference}) => (
   <div className={classes.daySelect}>
     {selectedConference.days.map(day => (
-      <ComposedDay key={day} day={day} {...props} />
+      <DayButton key={day} day={day} />
     ))}
   </div>
 );
 
-// redux
-const mapStateToProps = state => ({
-  selectedConference: selectedConferenceSelector(state),
-  selectedDay: selectedDaySelector(state),
-});
-
-export default connect(
-  mapStateToProps,
-  {selectDay},
-)(withStyles(styles)(Days));
+export default compose(
+  withSelector('selectedConference', selectedConferenceSelector),
+  withStyles({
+    daySelect: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  }),
+)(Days);

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {get} from 'truefit-react-utils';
+import {get} from '@truefit/http-utils';
 import {CODEMASH_DATA_URL} from '../constants';
 import {
   LOADING_SCHEDULE_DATA,

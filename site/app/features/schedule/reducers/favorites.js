@@ -1,5 +1,5 @@
 import produce from 'immer';
-import {stateReducer} from 'truefit-react-utils';
+import {stateReducer} from '@truefit/redux-utils';
 import {TOGGLE_FAVORITE} from '../constants/actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 

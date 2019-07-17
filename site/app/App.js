@@ -1,5 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {compose} from '@truefit/bach';
+import {withSelector} from '@truefit/bach-redux';
 import {withRouter} from 'react-router';
 
 import {MuiThemeProvider} from '@material-ui/core/styles';
@@ -10,7 +11,7 @@ import {themeSelector} from './features/shared/selectors';
 import {THEME_MAP} from './features/schedule/constants/themes';
 
 // render
-const Container = ({theme}) => (
+const App = ({theme}) => (
   <MuiThemeProvider theme={THEME_MAP[theme]}>
     <CssBaseline />
 
@@ -21,9 +22,4 @@ const Container = ({theme}) => (
   </MuiThemeProvider>
 );
 
-// redux
-const mapStateToProps = state => ({
-  theme: themeSelector(state),
-});
-
-export default connect(mapStateToProps)(withRouter(Container));
+export default compose(withSelector('theme', themeSelector))(withRouter(App));

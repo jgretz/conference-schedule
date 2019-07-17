@@ -1,20 +1,8 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
+import {compose} from '@truefit/bach';
+import {withStyles} from '@truefit/bach-material-ui';
+
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-// styles
-const styles = theme => ({
-  progressContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    height: '100%',
-  },
-  progress: {
-    margin: theme.spacing.unit * 2,
-  },
-});
 
 const Loading = ({classes}) => (
   <div className={classes.progressContainer}>
@@ -22,4 +10,17 @@ const Loading = ({classes}) => (
   </div>
 );
 
-export default withStyles(styles)(Loading);
+export default compose(
+  withStyles(theme => ({
+    progressContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+
+      height: '100%',
+    },
+    progress: {
+      margin: theme.spacing(2),
+    },
+  })),
+)(Loading);

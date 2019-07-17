@@ -1,4 +1,4 @@
-import {get} from 'truefit-react-utils';
+import {get} from '@truefit/http-utils';
 
 import {
   LOADING_SESSION_DETAIL,
