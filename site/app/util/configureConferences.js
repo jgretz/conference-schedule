@@ -4,6 +4,7 @@ import configureCodestock from '../features/codestock/util';
 import configureStirTrek from '../features/stirtrek/util';
 import configureThatConference from '../features/thatconference/util';
 import configureAbstractions from '../features/abstractions/util';
+import configureStrangeLoop from '../features/strangeloop/util';
 
 const configurations = [
   configureCodeMash,
@@ -11,6 +12,7 @@ const configurations = [
   configureStirTrek,
   configureThatConference,
   configureAbstractions,
+  configureStrangeLoop,
 ];
 
 export const CONFERENCES = [];
