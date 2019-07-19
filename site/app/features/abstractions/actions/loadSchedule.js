@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import moment from 'moment';
 
 import {get} from '@truefit/http-utils';
 import {SCHEDULE_URL} from '../constants';
@@ -9,12 +8,8 @@ import {
   FAILED_LOADING_SCHEDULE_DATA,
 } from '../../schedule/constants/actions';
 
-const ABS_DATE_TIME = 'YYYY-MM-DDTHH:mm:ss.SSSZ';
-
 const parseSessions = sessionsList =>
   sessionsList.map(session => {
-    const startTime = moment(session.starts_at, ABS_DATE_TIME).toISOString();
-    const endTime = moment(session.ends_at, ABS_DATE_TIME).toISOString();
     const tags = [session.level, ...session.tags.split(', ')];
 
     return {
@@ -22,8 +17,8 @@ const parseSessions = sessionsList =>
       title: session.title,
       description: session.body,
 
-      startTime,
-      endTime,
+      startTime: session.starts_at,
+      endTime: session.ends_at,
 
       roomId: session.room || 'TBD',
       speakers: session.presenter.name,
