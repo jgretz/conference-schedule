@@ -12,7 +12,7 @@ const parseSessions = sessionsList =>
   sessionsList.map(session => {
     const tags = [session.level, ...session.tags.split(', ')];
 
-    const rawSpeakers = session.presenter;
+    const rawSpeakers = [session.presenter];
     if (session.second_presenter) {
       rawSpeakers.push(session.second_presenter);
     }
@@ -26,7 +26,7 @@ const parseSessions = sessionsList =>
       endTime: session.ends_at,
 
       roomId: session.room || 'TBD',
-      speakers: rawSpeakers.maps(s => s.name),
+      speakers: rawSpeakers.map(s => s.name),
       tags,
 
       rawSpeakers,
