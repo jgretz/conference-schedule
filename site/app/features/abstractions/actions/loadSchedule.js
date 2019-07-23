@@ -12,6 +12,11 @@ const parseSessions = sessionsList =>
   sessionsList.map(session => {
     const tags = [session.level, ...session.tags.split(', ')];
 
+    const rawSpeakers = session.presenter;
+    if (session.second_presenter) {
+      rawSpeakers.push(session.second_presenter);
+    }
+
     return {
       id: session.id,
       title: session.title,
@@ -21,15 +26,15 @@ const parseSessions = sessionsList =>
       endTime: session.ends_at,
 
       roomId: session.room || 'TBD',
-      speakers: session.presenter.name,
+      speakers: rawSpeakers.maps(s => s.name),
       tags,
 
-      rawSpeaker: session.presenter,
+      rawSpeakers,
     };
   });
 
 const parseSpeakers = sessions => {
-  const withDuplicates = sessions.map(s => s.rawSpeaker);
+  const withDuplicates = sessions.map(s => s.rawSpeakers) |> _.flatMap;
   const uniq = _.uniqBy(withDuplicates, s => s.name);
 
   return uniq.map(s => ({

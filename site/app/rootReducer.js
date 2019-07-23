@@ -3,14 +3,14 @@
 /* eslint-disable object-shorthand */
 import {combineReducers} from 'redux';
 import {connectRouter} from 'connected-react-router';
-import schedule from './features/schedule/reducers';
 import shared from './features/shared/reducers';
+import schedule from './features/schedule/reducers';
 
 const rootReducer = history =>
   combineReducers({
     features: combineReducers({
-      schedule: schedule,
       shared: shared,
+      schedule: schedule,
     }),
     router: connectRouter(history),
   });
