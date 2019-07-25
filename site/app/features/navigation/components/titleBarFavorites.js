@@ -5,8 +5,8 @@ import {withActions, withSelector} from '@truefit/bach-redux';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-import {toggleFavoritesFilter} from '../actions';
-import {favoritesFilterSelector} from '../selectors';
+import {toggleFavoritesFilter} from '../../shared/actions';
+import {favoritesFilterSelector} from '../../shared/selectors';
 
 const FilterFavorites = ({favoritesFilter, handleFavoriteClick}) => (
   <IconButton

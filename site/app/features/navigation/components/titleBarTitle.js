@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import {toggleConferenceModal} from '../../schedule/actions';
-import {isScheduleRouteSelector} from '../selectors';
+import {isScheduleRouteSelector} from '../../shared/selectors';
 import {selectedConferenceSelector} from '../../schedule/selectors';
 
 const Title = ({classes, conference, handleButtonClick}) => (

@@ -2,8 +2,3 @@ export {default as About} from './about';
 export {default as NotFound} from './notFound';
 export {default as Routes} from './routes';
 export {default as Tappable} from './tappable';
-export {default as TitleBar} from './titleBar';
-export {default as TitleBarFavorites} from './titleBarFavorites';
-export {default as TitleBarInfo} from './titleBarInfo';
-export {default as TitleBarTheme} from './titleBarTheme';
-export {default as TitleBarTitle} from './titleBarTitle';

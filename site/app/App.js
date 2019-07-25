@@ -6,7 +6,8 @@ import {withRouter} from 'react-router';
 
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {TitleBar, Routes} from './features/shared/components';
+import {TitleBar} from './features/navigation/components';
+import {Routes} from './features/shared/components';
 import {Empty} from './features/schedule/components';
 
 import {initialize} from './features/schedule/actions';

@@ -5,7 +5,7 @@ import {withActions} from '@truefit/bach-redux';
 import IconButton from '@material-ui/core/IconButton';
 import InvertColorsIcon from '@material-ui/icons/InvertColors';
 
-import {toggleTheme} from '../actions';
+import {toggleTheme} from '../../shared/actions';
 
 const ThemeToggle = ({handleToggleTheme}) => (
   <IconButton
