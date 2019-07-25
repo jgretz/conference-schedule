@@ -1,15 +1,19 @@
+import moment from 'moment';
 import {get} from '@truefit/http-utils';
 import {SESSIONS_URL} from '../constants';
 import {
   LOADING_SCHEDULE_DATA,
   LOADED_SCHEDULE_DATA,
   FAILED_LOADING_SCHEDULE_DATA,
-} from '../../schedule/constants/actions';
+} from 'schedule-actions';
+
+const DATE_FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
 const mapToSharedModel = data => {
-  const sessions = data.sessions.map((x, id) => ({
+  const sessions = data.sessions.map(x => ({
     ...x,
-    id,
+    startTime: moment(x.startTime, DATE_FORMAT).toISOString(),
+    endTime: moment(x.endTime, DATE_FORMAT).toISOString(),
   }));
 
   return {

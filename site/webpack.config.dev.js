@@ -1,6 +1,7 @@
 import autoprefixer from 'autoprefixer';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import {EnvironmentPlugin, HotModuleReplacementPlugin} from 'webpack';
+import path from 'path';
 
 export default {
   mode: 'development',
@@ -19,6 +20,10 @@ export default {
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom',
+      'schedule-actions': path.resolve(
+        __dirname,
+        'app/features/schedule/constants/actions',
+      ),
     },
   },
   module: {

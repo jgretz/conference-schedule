@@ -36,6 +36,14 @@ export default {
     }),
     new Stylish(),
   ],
+  resolve: {
+    alias: {
+      'schedule-actions': path.resolve(
+        __dirname,
+        'app/features/schedule/constants/actions',
+      ),
+    },
+  },
   module: {
     rules: [
       {

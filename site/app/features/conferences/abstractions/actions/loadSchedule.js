@@ -6,7 +6,7 @@ import {
   LOADING_SCHEDULE_DATA,
   LOADED_SCHEDULE_DATA,
   FAILED_LOADING_SCHEDULE_DATA,
-} from '../../schedule/constants/actions';
+} from 'schedule-actions';
 
 const parseSessions = sessionsList =>
   sessionsList.map(session => {

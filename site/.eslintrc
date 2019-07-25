@@ -8,7 +8,7 @@
     "plugin:import/warnings",
     "prettier"
   ],
-  "plugins": ["react"],
+  "plugins": ["react", "import"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -20,6 +20,9 @@
     "es6": true,
     "browser": true,
     "node": true
+  },
+  "settings": {
+    "import/core-modules": ["schedule-actions"]
   },
   "rules": {
     "react/prop-types": ["error", {"skipUndeclared": true}],
