@@ -9,7 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InfoIcon from '@material-ui/icons/Info';
 
-import {isScheduleRouteSelector} from '../../shared/selectors';
+import {isAboutRouteSelector} from '../../shared/selectors';
 
 const Info = ({classes, to, text}) => (
   <Link to={to} className={classes.titleLink}>
@@ -23,11 +23,9 @@ const Info = ({classes, to, text}) => (
 );
 
 export default compose(
-  withSelector('isScheduleRoute', isScheduleRouteSelector),
-  withMemo('to', ({isScheduleRoute}) => (isScheduleRoute ? 'about' : '/')),
-  withMemo('text', ({isScheduleRoute}) =>
-    isScheduleRoute ? 'About' : 'Schedule',
-  ),
+  withSelector('isAboutRoute', isAboutRouteSelector),
+  withMemo('to', ({isAboutRoute}) => (isAboutRoute ? '/' : 'about')),
+  withMemo('text', ({isAboutRoute}) => (isAboutRoute ? 'Schedule' : 'About')),
 
   withStyles(theme => ({
     titleLink: {

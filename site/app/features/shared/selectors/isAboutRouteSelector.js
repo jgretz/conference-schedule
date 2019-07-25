@@ -4,5 +4,5 @@ import {ROUTES} from '../constants';
 
 export default createSelector(
   locationSelector,
-  location => location?.pathname === ROUTES.schedule.route,
+  location => location?.pathname === ROUTES.about.route,
 );

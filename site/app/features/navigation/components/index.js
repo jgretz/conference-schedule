@@ -1,4 +1,5 @@
 export {default as Drawer} from './drawer';
+export {default as DrawerConferenceItem} from './drawerConferenceItem';
 export {default as DrawerFavoritesItem} from './drawerFavoritesItem';
 export {default as DrawerIcon} from './drawerIcon';
 export {default as DrawerInfoItem} from './drawerInfoItem';
