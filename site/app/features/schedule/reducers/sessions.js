@@ -4,7 +4,7 @@ import {
   CONFERENCE_SELECTED,
   LOADED_SCHEDULE_DATA,
   LOADED_SESSION_DETAIL,
-} from '../constants/actions';
+} from '../actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const SESSIONS = 'SESSIONS';

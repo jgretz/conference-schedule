@@ -5,7 +5,7 @@ import loadingSelector from './loadingSelector';
 import sessionsSelector from './sessionsSelector';
 import selectedSelector from './selectedSelector';
 
-import {DATA_STATE} from '../constants/misc';
+import {DATA_STATE} from 'constants';
 
 // selector
 export default createSelector(

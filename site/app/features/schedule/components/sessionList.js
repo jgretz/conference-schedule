@@ -15,7 +15,7 @@ import {
 
 import {groupSessionsBySlot} from '../services';
 
-import {DATA_STATE} from '../constants/misc';
+import {DATA_STATE} from 'constants';
 
 const renderGroup = group => (
   <SessionListGroup key={group.time} group={group} />

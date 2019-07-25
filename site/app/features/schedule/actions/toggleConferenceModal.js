@@ -1,4 +1,4 @@
-import {TOGGLE_CONFERENCE_MODAL} from '../constants/actions';
+import {TOGGLE_CONFERENCE_MODAL} from './actions';
 
 export const toggleConferenceModal = () => ({
   type: TOGGLE_CONFERENCE_MODAL,

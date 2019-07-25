@@ -1,9 +1,6 @@
 import produce from 'immer';
 import {stateReducer} from '@truefit/redux-utils';
-import {
-  LOADED_SCHEDULE_DATA,
-  LOADED_SESSION_DETAIL,
-} from '../constants/actions';
+import {LOADED_SCHEDULE_DATA, LOADED_SESSION_DETAIL} from '../actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const SPEAKERS = 'SPEAKERS';

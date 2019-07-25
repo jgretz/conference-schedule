@@ -14,7 +14,7 @@ import {initialize} from './features/schedule/actions';
 import {themeSelector} from './features/shared/selectors';
 import {selectedConferenceSelector} from './features/schedule/selectors';
 
-import {THEME_MAP} from './features/schedule/constants/themes';
+import {THEME_MAP} from './features/styling/themes';
 
 const Content = () => (
   <div className="root">

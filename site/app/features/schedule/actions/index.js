@@ -1,3 +1,4 @@
+export * from './actions';
 export * from './initialize';
 export * from './loadSchedule';
 export * from './loadSession';

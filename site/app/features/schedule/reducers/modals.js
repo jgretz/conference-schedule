@@ -1,7 +1,7 @@
 import produce from 'immer';
 import {stateReducer} from '@truefit/redux-utils';
 
-import {SESSION_SELECTED, TOGGLE_CONFERENCE_MODAL} from '../constants/actions';
+import {SESSION_SELECTED, TOGGLE_CONFERENCE_MODAL} from '../actions';
 
 const INITIAL = {
   sessionModalVisible: false,

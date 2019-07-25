@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import {getItemFromStorage} from '../../shared/services';
 
-import {CONFERENCE} from '../constants/actions';
+import {CONFERENCE} from '../actions';
 import {CONFERENCES} from '../../../util/configureConferences';
 
 const nearestConference = () => {

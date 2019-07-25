@@ -22,7 +22,7 @@
     "node": true
   },
   "settings": {
-    "import/core-modules": ["schedule-actions"]
+    "import/core-modules": ["schedule-actions", "constants"]
   },
   "rules": {
     "react/prop-types": ["error", {"skipUndeclared": true}],

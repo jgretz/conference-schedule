@@ -8,7 +8,7 @@ import {
   LOADING_SESSION_DETAIL,
   LOADED_SESSION_DETAIL,
   FAILED_LOADING_SESSION_DETAIL,
-} from '../constants/actions';
+} from '../actions';
 
 const INITIAL = {
   scheduleData: false,

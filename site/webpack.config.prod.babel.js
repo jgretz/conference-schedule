@@ -40,8 +40,9 @@ export default {
     alias: {
       'schedule-actions': path.resolve(
         __dirname,
-        'app/features/schedule/constants/actions',
+        'app/features/schedule/actions',
       ),
+      constants: path.resolve(__dirname, 'app/features/shared/constants'),
     },
   },
   module: {

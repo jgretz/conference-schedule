@@ -1,5 +1,5 @@
 import {createMuiTheme} from '@material-ui/core/styles';
-import {THEMES} from '../../shared/constants';
+import {THEMES} from 'constants';
 
 const createTheme = (type, primary, secondary) =>
   createMuiTheme({

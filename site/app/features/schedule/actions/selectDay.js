@@ -1,4 +1,4 @@
-import {DAY_SELECTED} from '../constants/actions';
+import {DAY_SELECTED} from './actions';
 
 export const selectDay = day => ({
   type: DAY_SELECTED,

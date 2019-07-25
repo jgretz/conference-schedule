@@ -1,4 +1,4 @@
-import {CONFERENCE_SELECTED} from '../constants/actions';
+import {CONFERENCE_SELECTED} from './actions';
 import {selectDay} from './selectDay';
 import {getDefaultDayForConference} from '../services';
 

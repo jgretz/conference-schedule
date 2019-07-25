@@ -1,4 +1,4 @@
-import {INITIALIZE} from '../constants/actions';
+import {INITIALIZE} from './actions';
 import {getDefaultConference, getDefaultDayForConference} from '../services';
 
 export const initialize = () => {

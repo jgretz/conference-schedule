@@ -1,6 +1,6 @@
 import produce from 'immer';
 import {stateReducer} from '@truefit/redux-utils';
-import {TOGGLE_FAVORITE} from '../constants/actions';
+import {TOGGLE_FAVORITE} from '../actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const FAVORITES = 'ALL_FAVORITES';

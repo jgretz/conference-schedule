@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 import loadingSelector from './loadingSelector';
 import sessionsSelector from './sessionsSelector';
-import {DATA_STATE} from '../constants/misc';
+import {DATA_STATE} from 'constants';
 
 export default createSelector(
   loadingSelector,

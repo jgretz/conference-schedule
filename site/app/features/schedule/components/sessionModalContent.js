@@ -14,7 +14,7 @@ import {
   loadingSessionDetailSelector,
   speakersForSessionSelector,
 } from '../selectors';
-import {DATA_STATE} from '../constants/misc';
+import {DATA_STATE} from 'constants';
 
 const MODE = {
   DETAIL: 0,

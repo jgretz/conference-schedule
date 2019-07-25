@@ -8,7 +8,7 @@ import {
   DAY_SELECTED,
   SESSION_SELECTED,
   CONFERENCE,
-} from '../constants/actions';
+} from '../actions';
 
 const INITIAL = {
   conference: null,

@@ -1,5 +1,5 @@
 import {stateReducer} from '@truefit/redux-utils';
-import {LOADED_SCHEDULE_DATA} from '../constants/actions';
+import {LOADED_SCHEDULE_DATA} from '../actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const ROOMS = 'ROOMS';

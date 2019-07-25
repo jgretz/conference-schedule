@@ -9,7 +9,7 @@ import Divider from './sessionModalDivider';
 
 import {speakersForSessionSelector} from '../selectors';
 
-import {AVATAR} from '../constants/misc';
+import {AVATAR} from 'constants';
 
 const SpeakerContent = ({classes, speaker}) => (
   <>
