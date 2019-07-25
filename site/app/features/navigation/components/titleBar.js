@@ -6,21 +6,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import Title from './titleBarTitle';
-import FavoritesIcon from './titleBarFavorites';
-import InfoIcon from './titleBarInfo';
-import ThemeIcon from './titleBarTheme';
+import Drawer from './drawer';
 
 const TitleBar = ({classes}) => (
   <AppBar position="static" color="primary">
     <Toolbar className={classes.toolbar}>
       <div className={classes.toolbarContent}>
+        <Drawer />
         <Title />
-
-        <div>
-          <ThemeIcon />
-          <InfoIcon />
-          <FavoritesIcon />
-        </div>
       </div>
     </Toolbar>
   </AppBar>
