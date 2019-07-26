@@ -66,18 +66,6 @@ const About = ({classes}) => (
     <Divider className={classes.divider} />
 
     <Typography variant="body1" gutterBottom className={classes.text}>
-      Quick usability note: I store all of the session data, speaker data, and
-      your favorites in local storage. Because of this approach, there
-      isn&apos;t a way currently to share those across devices. I realize this
-      an annoyance, but I don&apos;t have a slick way right now to share it, and
-      I don&apos;t have the resources for this project to setup a database. If
-      you would like this limitation to be addressed, there are two paths: cash
-      (see the coffee link above) or code (see the github link below).
-    </Typography>
-
-    <Divider className={classes.divider} />
-
-    <Typography variant="body1" gutterBottom className={classes.text}>
       If you&apos;re a developer and you would like to contribute a feature or
       add a conference that I haven&apos;t - I gladly accept pull requests (
       <Link

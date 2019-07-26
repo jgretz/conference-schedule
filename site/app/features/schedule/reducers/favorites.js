@@ -1,6 +1,6 @@
 import produce from 'immer';
 import {stateReducer} from '@truefit/redux-utils';
-import {TOGGLE_FAVORITE} from '../actions';
+import {TOGGLE_FAVORITE, INITIALIZE} from '../actions';
 import {getItemFromStorage, setItemInStorage} from '../../shared/services';
 
 const FAVORITES = 'ALL_FAVORITES';
@@ -29,5 +29,14 @@ export default stateReducer(INITIAL, {
     setItemInStorage(FAVORITES, newState);
 
     return newState;
+  },
+
+  [INITIALIZE]: (state, {favorites}) => {
+    if (!favorites) {
+      return state;
+    }
+
+    setItemInStorage(FAVORITES, favorites);
+    return favorites;
   },
 });

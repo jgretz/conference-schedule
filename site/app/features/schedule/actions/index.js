@@ -1,4 +1,6 @@
 export * from './actions';
+export * from './clearFavoritesLink';
+export * from './generateFavoritesLink';
 export * from './initialize';
 export * from './loadSchedule';
 export * from './loadSession';
@@ -7,3 +9,4 @@ export * from './selectDay';
 export * from './selectSession';
 export * from './toggleConferenceModal';
 export * from './toggleFavorite';
+export * from './toggleLinkModal';

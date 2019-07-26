@@ -1,6 +1,7 @@
 /* eslint-disable sort-imports */
 import {combineReducers} from 'redux';
 import favorites from './favorites.js';
+import link from './link.js';
 import loading from './loading.js';
 import modals from './modals.js';
 import rooms from './rooms.js';
@@ -11,6 +12,7 @@ import tags from './tags.js';
 
 export default combineReducers({
   favorites,
+  link,
   loading,
   modals,
   rooms,

@@ -8,6 +8,7 @@ import SessionList from './sessionList';
 import DaySelection from './daySelection';
 import SessionModal from './sessionModal';
 import ConferenceModal from './conferenceModal';
+import LinkModal from './linkModal';
 
 import {loadSchedule} from '../actions';
 import {selectedConferenceSelector} from '../selectors';
@@ -20,6 +21,7 @@ const Schedule = ({classes}) => {
 
       <SessionModal />
       <ConferenceModal />
+      <LinkModal />
     </div>
   );
 };

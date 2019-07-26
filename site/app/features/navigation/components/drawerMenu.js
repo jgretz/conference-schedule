@@ -10,6 +10,7 @@ import ThemeItem from './drawerThemeItem';
 import InfoItem from './drawerInfoItem';
 import ChangeConferenceItem from './drawerConferenceItem';
 import ConferenceSiteItem from './drawerConferenceSiteItem';
+import DrawerShareItem from './drawerShareItem';
 
 const Menu = ({classes, toggleOpen}) => (
   <div
@@ -19,17 +20,18 @@ const Menu = ({classes, toggleOpen}) => (
     onKeyDown={toggleOpen}
   >
     <List>
+      <ConferenceSiteItem />
+      <InfoItem />
+    </List>
+    <Divider />
+    <List>
       <FavoriteItem />
       <ThemeItem />
+      <DrawerShareItem />
     </List>
     <Divider />
     <List>
       <ChangeConferenceItem />
-    </List>
-    <Divider />
-    <List>
-      <ConferenceSiteItem />
-      <InfoItem />
     </List>
   </div>
 );
