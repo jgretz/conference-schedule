@@ -1,12 +1,9 @@
-// const PRODUCTION = 'PRODUCTION';
+const PRODUCTION = 'PRODUCTION';
 
-export default {
-  bitlyToken: process.env.bitlyToken,
-};
-
-// export default {
-//   :
-//     process.env.NODE_ENV === PRODUCTION
-//       ?
-//       : PRIVATE.default.bitlyToken,
-// };
+export default (process.env.NODE_ENV === PRODUCTION
+  ? {
+    bitlyToken: process.env.bitlyToken,
+  }
+  : {
+    bitlyToken: require('./private').default.bitlyToken,
+  });
