@@ -8,15 +8,16 @@
   "author": "Josh Gretz",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
-    "cheerio": "^1.0.0-rc.2",
-    "compression": "^1.7.3",
-    "lodash": "^4.17.11",
+    "axios": "^0.19.0",
+    "bitly": "^6.1.0",
+    "cheerio": "^1.0.0-rc.3",
+    "compression": "^1.7.4",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.25",
-    "node-bits": "^0.0.34",
-    "node-bits-code": "^0.0.25",
-    "node-bits-express": "^0.0.21",
-    "node-bits-spa": "^0.0.8"
+    "moment-timezone": "^0.5.26",
+    "node-bits": "^0.0.35",
+    "node-bits-code": "^0.0.26",
+    "node-bits-express": "^0.0.23",
+    "node-bits-spa": "^0.0.9"
   }
 }
