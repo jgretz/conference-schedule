@@ -1,6 +1,8 @@
 import {INITIALIZE} from './actions';
 import {getDefaultConference, getDefaultDayForConference} from '../services';
 
+const translateFavoriteKey = key => key.replace('+', ' ').replace(' 2019', '');
+
 const parseFavorites = () => {
   if (!window.location.search.includes('favorites')) {
     return null;
@@ -9,7 +11,10 @@ const parseFavorites = () => {
   const raw = window.location.search.replace('?favorites=', '');
   const json = JSON.parse(decodeURIComponent(raw));
 
-  return json;
+  return Object.keys(json).reduce((acc, key) => {
+    acc[translateFavoriteKey(key)] = json[key];
+    return acc;
+  }, {});
 };
 
 export const initialize = () => {

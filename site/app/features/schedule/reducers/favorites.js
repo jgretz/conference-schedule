@@ -37,6 +37,10 @@ export default stateReducer(INITIAL, {
     }
 
     setItemInStorage(FAVORITES, favorites);
+    setTimeout(() => {
+      window.location = '/';
+    }, 10);
+
     return favorites;
   },
 });
