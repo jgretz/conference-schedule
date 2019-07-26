@@ -8,7 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import FavoriteItem from './drawerFavoritesItem';
 import ThemeItem from './drawerThemeItem';
 import InfoItem from './drawerInfoItem';
-import DrawerConferenceItem from './drawerConferenceItem';
+import ChangeConferenceItem from './drawerConferenceItem';
+import ConferenceSiteItem from './drawerConferenceSiteItem';
 
 const Menu = ({classes, toggleOpen}) => (
   <div
@@ -23,10 +24,11 @@ const Menu = ({classes, toggleOpen}) => (
     </List>
     <Divider />
     <List>
-      <DrawerConferenceItem />
+      <ChangeConferenceItem />
     </List>
     <Divider />
     <List>
+      <ConferenceSiteItem />
       <InfoItem />
     </List>
   </div>

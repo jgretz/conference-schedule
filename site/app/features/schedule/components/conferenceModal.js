@@ -1,45 +1,43 @@
 import React from 'react';
-import {compose, withCallback} from '@truefit/bach';
+import {compose, withCallback, withMemo} from '@truefit/bach';
 import {withActions, withSelector} from '@truefit/bach-redux';
 import {withStyles} from '@truefit/bach-material-ui';
 
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import ConferenceButton from './conferenceButton';
 
 import {toggleConferenceModal} from '../actions';
 import {modalsSelector} from '../selectors';
-import {CONFERENCES} from '../../../util/configureConferences';
+import {groupConferencesByDate} from '../services';
 
-// render
-const Cancel = ({handleClose}) => (
-  <ListItem button onClick={handleClose}>
-    <ListItemText primary="Cancel" />
-  </ListItem>
-);
-
-const ConferenceList = props => (
+const ConferenceList = ({conferences}) => (
   <List>
-    {CONFERENCES.map(conf => (
+    {conferences.map(conf => (
       <ConferenceButton key={conf.title} conference={conf} />
     ))}
-    <Cancel key="Cancel" {...props} />
   </List>
 );
 
-const ConferenceModal = ({modals, handleClose, ...props}) => (
+const ConferenceModal = ({classes, modals, conferences, handleClose}) => (
   <Dialog
     open={modals.conferenceModalVisible}
     onClose={handleClose}
-    aria-labelledby="conf-dialog-title"
+    aria-label="conference dialog"
   >
-    <DialogTitle id="conf-dialog-title">Select A Conference</DialogTitle>
-    <div>
-      <ConferenceList handleClose={handleClose} {...props} />
-    </div>
+    <Typography variant="h5" className={classes.title}>
+      Conferences
+    </Typography>
+
+    <ConferenceList conferences={conferences.present} />
+
+    <Divider />
+    <Typography variant="h5" className={classes.title}>
+      Past Conferences
+    </Typography>
+    <ConferenceList conferences={conferences.past} />
   </Dialog>
 );
 
@@ -47,9 +45,15 @@ export default compose(
   withActions({toggleConferenceModal}),
   withSelector('modals', modalsSelector),
 
+  withMemo('conferences', () => groupConferencesByDate(), []),
+
   withCallback('handleClose', ({toggleConferenceModal}) => () => {
     toggleConferenceModal();
   }),
 
-  withStyles(),
+  withStyles({
+    title: {
+      margin: '18px 0 0 12px',
+    },
+  }),
 )(ConferenceModal);
