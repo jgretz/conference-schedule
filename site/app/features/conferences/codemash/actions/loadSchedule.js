@@ -8,25 +8,38 @@ import {
 } from 'schedule-actions';
 
 const mapToSharedModel = data => {
-  const tags = _.flatMap(data.categories, x => x.items);
   const sessions = data.sessions.map(x => ({
     ...x,
+
     startTime: x.startsAt,
     endTime: x.endsAt,
-    tags: x.categoryItems,
+
+    tags: _.flatMap(x.categories, c => c.categoryItems.map(x => x.id)),
+    speakers: x.speakers.map(s => s.id),
   }));
 
-  const speakers = data.speakers.map(x => ({
-    ...x,
-    name: x.fullName,
-  }));
+  const tags = _.uniqBy(
+    _.flattenDeep(
+      data.sessions.map(x => x.categories.map(x => x.categoryItems)),
+    ),
+    x => x.id,
+  );
+
+  const speakers = _.uniqBy(
+    _.flatMap(data.sessions, x => x.speakers),
+    x => x.id,
+  );
+
+  const rooms = _.uniqBy(
+    data.sessions.map(x => ({id: x.roomId, name: x.room})),
+    x => x.id,
+  );
 
   return {
     sessions,
     speakers,
     tags,
-
-    rooms: data.rooms,
+    rooms,
   };
 };
 
@@ -35,7 +48,7 @@ export const loadSchedule = async dispatch => {
 
   try {
     const response = await get(CODEMASH_DATA_URL);
-    const payload = mapToSharedModel(response.data);
+    const payload = mapToSharedModel(response.data[0]);
 
     dispatch({
       type: LOADED_SCHEDULE_DATA,

@@ -4,7 +4,7 @@ export default () => ({
   title: 'CodeMash',
   loadSchedule,
   loadSession,
-  days: ['2019-01-08', '2019-01-09', '2019-01-10', '2019-01-11'],
+  days: ['2020-01-07', '2020-01-08', '2020-01-09', '2020-01-10'],
   tags: ['codemash'],
   location: 'Sandusky, OH',
   site: 'http://www.codemash.org/',

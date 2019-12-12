@@ -8,6 +8,5 @@ export default () => ({
   tags: ['thatconference'],
   location: 'Wisconsin Dells, WI',
   site: 'https://www.thatconference.com/',
-  image:
-    'https://pbs.twimg.com/profile_images/913591850576969730/lQx8iaMm_400x400.jpg',
+  image: 'https://www.thatconference.com/svgs/THATConference.svg',
 });
