@@ -16,7 +16,7 @@
     "bitly": "^6.1.0",
     "cheerio": "^1.0.0-rc.3",
     "compression": "^1.7.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "node-bits": "^0.0.35",
